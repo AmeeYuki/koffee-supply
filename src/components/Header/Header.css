@@ -1,0 +1,13 @@
+header {
+  background-color: #1b392d;
+  color: #d6e0db;
+  /* height: 96px; */
+}
+
+/* header .cursor {
+  cursor: pointer;
+} */
+header .cursor:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

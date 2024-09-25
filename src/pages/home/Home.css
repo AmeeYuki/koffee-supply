@@ -1,0 +1,194 @@
+.home-page .top {
+  margin: 68px 118px;
+}
+.home-page .top .content .title {
+  color: #1b392d;
+  font-size: 84px;
+  font-family: "MyCustomFont";
+  line-height: 1.1;
+}
+
+.home-page .top .content {
+  color: #1b392d;
+  font-weight: bold;
+  line-height: 1.7;
+}
+.home-page .kofee-line {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KoffeLine.png?alt=media&token=6c0202d3-1e7d-4247-b14e-903ac3da4dbe");
+  background-repeat: repeat;
+  width: 100%;
+  height: 70px;
+  /* Animation */
+  animation: scroll-left 10s linear infinite;
+}
+@keyframes scroll-left {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+.home-page .intro-kofee {
+  background-color: #1b392d;
+  display: block;
+  width: 100%;
+  padding: 100px;
+  color: #f1f8f4;
+  line-height: 1.6;
+  /* padding: 100px; */
+}
+.home-page .intro-kofee .title {
+  font-size: 54px;
+  font-family: "MyCustomFont";
+}
+
+.home-page .product-sell .header .title {
+  color: #1b392d;
+  padding-left: 170px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 54px;
+  font-family: "MyCustomFont";
+}
+.home-page .product-sell .product-item {
+  height: 590px;
+  width: 520px;
+}
+
+.home-page .product-sell .product-item .product-information {
+  border: 1px #1b392d solid;
+  padding: 30px 40px;
+  color: #1b392d;
+  border-radius: 20px;
+  text-align: center;
+}
+.home-page .product-sell .product-item .product-information .title {
+  color: #1b392d;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-family: "MyCustomFont";
+}
+.home-page .product-sell .product-item .product-information .description {
+  color: #1b392d;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.home-page .product-sell .product-item .product-information img {
+  height: 234px;
+  border-radius: 20px;
+  border: #1b392d solid 1px;
+  width: 440px;
+  object-fit: cover;
+}
+.home-page .product-sell .product-item .product-information .money {
+  color: #1b392d;
+  margin-top: 20px;
+  font-size: 26px;
+  font-family: "MyCustomFont";
+}
+.home-page .product-sell .product-item .product-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+.home-page .product-sell .product-item .product-action .see-more {
+  border: 1px #1b392d solid;
+  padding: 20px 130px;
+  color: #1b392d;
+  border-radius: 20px;
+  text-align: center;
+}
+.home-page .product-sell .product-item .product-action .see-more:hover {
+  opacity: 0.9;
+  background-color: #1b392d;
+  color: #f1f8f4;
+  font-weight: bold;
+  cursor: pointer;
+}
+.home-page .product-sell .product-item .product-action .add-to-cart {
+  border: #1b392d 1px solid;
+  text-align: center;
+  padding: 15px 35px;
+  background-color: #1b392d;
+  border-radius: 12px;
+  color: #f1f8f4;
+  font-size: 26px;
+  font-weight: 400;
+}
+.home-page .product-sell .product-item .product-action .add-to-cart:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.home-page .kofee-bean-to-brew {
+  margin-bottom: 100px;
+  margin-top: 50px;
+}
+.home-page .kofee-bean-to-brew .header {
+  color: #1b392d;
+  margin-top: 20px;
+  padding-left: 170px;
+  font-size: 54px;
+  font-family: "MyCustomFont";
+  margin-bottom: 40px;
+}
+.home-page .kofee-bean-to-brew .bean-to-brew {
+  margin: 10px 200px;
+}
+.image-bean-to-brew {
+  width: 100%;
+  object-fit: contain;
+  height: 402px;
+  border-radius: 20px;
+}
+.home-page .kofee-team {
+  margin-bottom: 130px;
+}
+.home-page .kofee-team .header {
+  color: #1b392d;
+  margin-top: 20px;
+  font-size: 54px;
+  font-family: "MyCustomFont";
+  margin-bottom: 40px;
+  text-align: center;
+}
+.home-page .kofee-team .teams {
+  display: flex;
+  justify-content: center;
+  color: #1b392d;
+  margin-top: 50px;
+}
+.home-page .kofee-team .teammate {
+  padding: 20px 20px;
+  width: 664px;
+  height: 310px;
+  border-radius: 20px;
+  background-color: #ddeee3;
+  border: 1px solid transparent;
+}
+.home-page .kofee-team .teammate .title {
+  font-family: MyCustomFont;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.home-page .kofee-team .teammate .description {
+  font-size: 16px;
+  padding: 0 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.home-page .kofee-team .teammate .avatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 20px;
+}
+.home-page .kofee-team .teammate .name {
+  font-family: "MyCustomFont";
+  font-size: 18px;
+}
+.home-page .kofee-team .teammate .nghe {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

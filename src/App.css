@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+  /* font-size: 22px; */
+}
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("./assets/fonts/DFVN Constructio Grotesk.otf") format("opentype");
+  /* font-weight: normal; */
+  /* font-style: normal; */
+}
+.font-family-custom {
+  font-family: "MyCustomFont";
+}
+
+:where(
+    .css-dev-only-do-not-override-985vm5
+  ).ant-radio-button-wrapper-checked:not(
+    .ant-radio-button-wrapper-disabled
+  )::before {
+  background-color: #00000000;
+}

@@ -20,19 +20,53 @@ export default function DescriptionMore() {
         <div>
           <p>Thôn Cầu Đất, Thành Phố Đà Lạt, Tỉnh Lâm Đồng</p>
           <Row>
-            <Col></Col>
-            <b>Độ cao:</b>
-            <b>Giống:</b>
-            <b>PP canh tác:</b>
+            <Col span={4}>
+              <p>
+                <b>Độ cao:</b>
+              </p>
+              <p>
+                <b>Giống:</b>
+              </p>
+              <p>
+                <b>PP canh tác:</b>
+              </p>
+            </Col>
+            <Col>
+              <p>ame</p>
+              <p>ame</p>
+              <p>ame</p>
+            </Col>
           </Row>
         </div>
       ),
     },
-    {
-      key: "3",
-      label: "Vùng nguyên liệu",
-      children: <p>{text}</p>,
-    },
+    // {
+    //   key: "3",
+    //   label: "Vùng nguyên liệu",
+    //   children: (
+    //     <div>
+    //       <p>Thôn Cầu Đất, Thành Phố Đà Lạt, Tỉnh Lâm Đồng</p>
+    //       <Row>
+    //         <Col span={4}>
+    //           <p>
+    //             <b>Độ cao:</b>
+    //           </p>
+    //           <p>
+    //             <b>Giống:</b>
+    //           </p>
+    //           <p>
+    //             <b>PP canh tác:</b>
+    //           </p>
+    //         </Col>
+    //         <Col>
+    //           <p>ame</p>
+    //           <p>ame</p>
+    //           <p>ame</p>
+    //         </Col>
+    //       </Row>
+    //     </div>
+    //   ),
+    // },
   ];
   const onChange = (key) => {
     console.log(key);

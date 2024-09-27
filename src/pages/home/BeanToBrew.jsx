@@ -88,8 +88,8 @@ export default function BeanToBrew() {
 
   return (
     <div>
-      <Row>
-        <Col span={11}>
+      <Flex gap={40} wrap="wrap">
+        <Col md={11} sm={24}>
           {activeKey == "1" ? (
             <img
               className="image-bean-to-brew"
@@ -127,7 +127,7 @@ export default function BeanToBrew() {
             />
           )}
         </Col>
-        <Col span={11} offset={2}>
+        <Col md={11} sm={24}>
           <ConfigProvider
             theme={{
               token: {
@@ -175,7 +175,7 @@ export default function BeanToBrew() {
             />
           </ConfigProvider>
         </Col>
-      </Row>
+      </Flex>
     </div>
   );
 }

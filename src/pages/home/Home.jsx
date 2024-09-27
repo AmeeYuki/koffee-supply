@@ -6,16 +6,16 @@ import Carousele from "./Caurosel";
 function Home() {
   return (
     <div className="home-page">
-      <div className="top">
-        <Row>
-          <Col span={8}>
+      <div className="container top">
+        <Flex gap={50} wrap="wrap">
+          <Col sm={24} md={8}>
             <img
-              width={"100%"}
+              width={"300px"}
               src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/kofee_red.png?alt=media&token=408dd306-8bd7-478d-92c2-4c025644fd6e"
               alt="Coffe Logo"
             ></img>
           </Col>
-          <Col span={12} offset={4} className="content">
+          <Col md={12} sm={24} className="content">
             <p className="title">BỊCH KO-FEE CÓ 102</p>
             <p>Để có một bịch KO-FEE của riêng bạn:</p>
             <ol style={{ marginLeft: 20 }}>
@@ -43,7 +43,7 @@ function Home() {
               DIY Cái bịch KO-FEE
             </Button>
           </Col>
-        </Row>
+        </Flex>
       </div>
       <div className="kofee-line"></div>
       <div className="intro-kofee">
@@ -53,7 +53,7 @@ function Home() {
         <p style={{ textAlign: "center", fontSize: 36 }}>
           /kə.fĭ/ <b>(n)</b>
         </p>
-        <p style={{ padding: "0 20%", fontWeight: 600, letterSpacing: 1 }}>
+        <p style={{ padding: "0 10%", fontWeight: 600, letterSpacing: 1 }}>
           "Ko-fee" - cái tên mang âm hưởng J'rai, cái tên này như là một lời tri
           ân dành cho những người dân tộc J'rai. Những người con của núi rừng
           Tây Nguyên đã gìn giữ và phát triển nghề trồng cà phê nơi đây. Hơn cả
@@ -67,7 +67,7 @@ function Home() {
             KO-FEE có <br /> 2 hạt cafe xịn
           </p>
         </div>
-        <Flex justify="space-evenly">
+        <Flex justify="space-evenly" wrap="wrap">
           <div>
             <div className="product-item">
               <div className="product-information">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { Breadcrumb, message } from "antd";
 import ProductSpace from "./ProductSpace";
+import UnderProductDetail from "./components/UnderProductDetail";
 export default function ProductDetail() {
   const [cart, setCart] = useState([]); // Cart state
 
@@ -38,13 +39,16 @@ export default function ProductDetail() {
 
   return (
     <div className="product-detail-page">
-      <div className="header-breadcrumb">
+      <div className="header-breadcrumb container">
         <p className="breadcrumb-item">Sản phẩm</p>
         <i className="icon-breadcrumb ri-arrow-right-s-line"></i>
         <p className="breadcrumb-item">Arabica Măng Đen</p>
       </div>
-      <div>
+      <div className="container">
         <ProductSpace onAddToCart={handleAddToCart} />
+      </div>
+      <div>
+        <UnderProductDetail />
       </div>
     </div>
   );

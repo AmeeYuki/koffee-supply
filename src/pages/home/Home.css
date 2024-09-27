@@ -1,14 +1,15 @@
 .home-page .top {
-  margin: 68px 118px;
+  margin: 3% 3%;
 }
-.home-page .top .content .title {
+
+.home-page .container .content .title {
   color: #1b392d;
   font-size: 84px;
   font-family: "MyCustomFont";
   line-height: 1.1;
 }
 
-.home-page .top .content {
+.home-page .container .content {
   color: #1b392d;
   font-weight: bold;
   line-height: 1.7;
@@ -45,7 +46,7 @@
 
 .home-page .product-sell .header .title {
   color: #1b392d;
-  padding-left: 170px;
+  padding-left: 10%;
   margin-top: 40px;
   margin-bottom: 20px;
   font-size: 54px;
@@ -129,7 +130,7 @@
 .home-page .kofee-bean-to-brew .header {
   color: #1b392d;
   margin-top: 20px;
-  padding-left: 170px;
+  padding-left: 10%;
   font-size: 54px;
   font-family: "MyCustomFont";
   margin-bottom: 40px;

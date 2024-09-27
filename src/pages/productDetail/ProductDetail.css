@@ -23,6 +23,7 @@
   font-family: "MyCustomFont";
   font-size: 32px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .product-detail-page .product-detail .description {
   font-size: 18px;
@@ -36,16 +37,13 @@
   font-weight: 600;
   user-select: none;
 }
-.config-provider {
-  --color-primary: #1b392d;
-}
 
-.radio-group {
+.product-detail-page .radio-group {
   /* display: flex; */
   gap: 20px;
 }
 
-.radio-button {
+.product-detail-page .radio-button {
   border: 0.5px solid #1b392d;
   border-radius: 10px;
   padding: 10px 20px;
@@ -58,16 +56,16 @@
   font-weight: 600;
 }
 
-.radio-button:hover {
+.product-detail-page .radio-button:hover {
   background-color: #1b392d;
   color: rgb(255, 255, 255);
 }
 
-.radio-button.selected {
+.product-detail-page .radio-button.selected {
   background-color: #1b392d;
   color: rgb(255, 255, 255);
 }
-.radio-button-weight {
+.product-detail-page .radio-button-weight {
   border: 0.5px solid #1b392d;
   border-radius: 10px;
   width: 180px;
@@ -83,22 +81,22 @@
   text-align: start;
 }
 
-.radio-button-weight:hover {
+.product-detail-page .radio-button-weight:hover {
   background-color: #1b392d;
   color: rgb(255, 255, 255);
 }
 
-.radio-button-weight.selected {
+.product-detail-page .radio-button-weight.selected {
   background-color: #1b392d;
   color: rgb(255, 255, 255);
 }
 
-.style-gram {
+.product-detail-page .style-gram {
   font-family: "MyCustomFont";
   font-size: 14px;
   margin-bottom: 8px;
 }
-.radio-button-bag {
+.product-detail-page .radio-button-bag {
   /* background-color: transparent; */
   color: #ffffff;
   cursor: pointer;
@@ -106,15 +104,68 @@
   margin-bottom: 5px;
   font-weight: 300;
   text-align: start;
-
-.radio-button-bag:hover {
+  /* border-radius: 20px; */
+  border: #00000000 1px solid;
+}
+.product-detail-page .radio-button-bag:hover {
   opacity: 0.5;
 }
 
-.radio-button-bag.selected {
-  opacity: 0.5;
+.product-detail-page .radio-button-bag.selected {
+  opacity: 0.4;
+  border: 2px #828282 solid;
+  border-radius: 10px;
+  /* font-size: 50px; */
 }
-.style-bag {
+.product-detail-page .style-bag {
   font-family: "MyCustomFont";
-  font-size: 14px;
+  /* font-size: 14px; */
+}
+.product-detail-page .quantity-controls {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 20px; */
+  align-items: center;
+  border: #1b392d solid 1px;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.product-detail-page .quantity-controls .decrement,
+.product-detail-page .quantity-controls .increment {
+  padding: 5px 20px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  border: #00000000 0px solid;
+}
+
+.product-detail-page .quantity-controls .quantity-value {
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.product-detail-page .add-to-cart {
+  padding: 18px 20px;
+  border: #1b392d 1px solid;
+  width: 400px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #1b392d;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.product-detail-page .add-to-cart:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.product-detail-page .add-to-cart:active {
+  box-shadow: 1px 1px 1px 1px #7b7b7bd2;
+}
+.product-detail-page .giao-hang {
+  margin: 20px 0;
+  border-radius: 10px;
+  border: #f0cac7 3px dashed;
+  padding: 30px 10px;
 }

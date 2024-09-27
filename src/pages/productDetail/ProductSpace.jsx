@@ -4,7 +4,7 @@ import { Col, Flex, Row } from "antd";
 import CarouselImage from "./components/CarouselImage";
 import ProductInformation from "./components/ProductInformation";
 
-export default function ProductSpace() {
+export default function ProductSpace({ onAddToCart }) {
   return (
     <div className="product-space">
       <Row>
@@ -14,7 +14,7 @@ export default function ProductSpace() {
           </div>
         </Col>
         <Col md={12} sm={24} offset={2}>
-          <ProductInformation />
+          <ProductInformation onAddToCart={onAddToCart} />
         </Col>
       </Row>
     </div>

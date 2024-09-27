@@ -1,6 +1,10 @@
 import { CaretRightOutlined } from "@ant-design/icons";
 import { Col, Collapse, ConfigProvider, Flex, Row, theme } from "antd";
 import React, { useState } from "react";
+import btb1 from "../../assets/images/bean-to-brew1.png";
+import btb2 from "../../assets/images/bean-to-brew2.png";
+import btb3 from "../../assets/images/bean-to-brew3.png";
+import btb4 from "../../assets/images/kofee_red.png";
 
 export default function BeanToBrew() {
   const [activeKey, setActiveKey] = useState("1"); // State to track the active panel
@@ -89,35 +93,35 @@ export default function BeanToBrew() {
           {activeKey == "1" ? (
             <img
               className="image-bean-to-brew"
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/bean-to-brew1.png?alt=media&token=b7062fab-166a-4221-b640-5d71e5d2831d"
+              src={btb1}
               alt="bean to brew"
               style={{ width: "100%" }}
             />
           ) : activeKey == "2" ? (
             <img
               className="image-bean-to-brew"
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/bean-to-brew2.png?alt=media&token=e43a12a2-deed-435f-b3ec-87ac7e419edf" // Dynamically display the image based on active panel
+              src={btb2}
               alt="bean to brew"
               style={{ width: "100%" }}
             />
           ) : activeKey == "3" ? (
             <img
               className="image-bean-to-brew"
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/bean-to-brew3.png?alt=media&token=81e0847a-e129-4e37-a4a1-be361ebab30e" // Dynamically display the image based on active panel
+              src={btb3}
               alt="bean to brew"
               style={{ width: "100%" }}
             />
           ) : activeKey == "4" ? (
             <img
               className="image-bean-to-brew"
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/kofee_red.png?alt=media&token=408dd306-8bd7-478d-92c2-4c025644fd6e"
+              src={btb4}
               alt="bean to brew"
               style={{ width: "100%" }}
             />
           ) : (
             <img
               className="image-bean-to-brew"
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/bean-to-brew1.png?alt=media&token=b7062fab-166a-4221-b640-5d71e5d2831d"
+              src={btb1}
               alt="bean to brew"
               style={{ width: "100%" }}
             />

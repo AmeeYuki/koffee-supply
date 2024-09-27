@@ -68,44 +68,41 @@ function Home() {
           </p>
         </div>
         <Flex justify="space-evenly" wrap="wrap">
-          <div>
-            <div className="product-item">
-              <div className="product-information">
-                <p className="title ">The 100% Arabica Măng Đen</p>
-                <p className="description">
-                  Hạt Arabica Măng Đen cân bằng độ chua nhẹ với hương hoa, trái
-                  cây và vị đắng nhẹ.
-                </p>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KofeeArabica.png?alt=media&token=67da4c2e-416b-40f6-8d97-c601f7f47335"
-                  alt="Kofee"
-                ></img>
-                <p className="money">400.000 vnđ | 1kg</p>
-              </div>
-              <div className="product-action">
-                <p className="see-more">Tìm hiểu thêm</p>
-                <i className="add-to-cart ri-shopping-cart-2-line"></i>
-              </div>
+          <div className="product-item">
+            <div className="product-information">
+              <p className="title ">The 100% Arabica Măng Đen</p>
+              <p className="description">
+                Hạt Arabica Măng Đen cân bằng độ chua nhẹ với hương hoa, trái
+                cây và vị đắng nhẹ.
+              </p>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KofeeArabica.png?alt=media&token=67da4c2e-416b-40f6-8d97-c601f7f47335"
+                alt="Kofee"
+              ></img>
+              <p className="money">400.000 vnđ | 1kg</p>
+            </div>
+            <div className="product-action">
+              <p className="see-more">Tìm hiểu thêm</p>
+              <i className="add-to-cart ri-shopping-cart-2-line"></i>
             </div>
           </div>
-          <div>
-            <div className="product-item">
-              <div className="product-information">
-                <p className="title ">The 100% Robusta Măng Đen</p>
-                <p className="description">
-                  Hạt Robusta Măng Đen có hương vị đắng đậm đà, mạnh mẽ mang lại
-                  sự sảng khoái, tỉnh táo
-                </p>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KoffeRobusta.png?alt=media&token=6d5fb927-dead-4532-a667-46ed27791310"
-                  alt="Kofee"
-                ></img>
-                <p className="money">400.000 vnđ | 1kg</p>
-              </div>
-              <div className="product-action">
-                <p className="see-more">Tìm hiểu thêm</p>
-                <i className="add-to-cart ri-shopping-cart-2-line"></i>
-              </div>
+
+          <div className="product-item">
+            <div className="product-information">
+              <p className="title ">The 100% Robusta Măng Đen</p>
+              <p className="description">
+                Hạt Robusta Măng Đen có hương vị đắng đậm đà, mạnh mẽ mang lại
+                sự sảng khoái, tỉnh táo
+              </p>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KoffeRobusta.png?alt=media&token=6d5fb927-dead-4532-a667-46ed27791310"
+                alt="Kofee"
+              ></img>
+              <p className="money">400.000 vnđ | 1kg</p>
+            </div>
+            <div className="product-action">
+              <p className="see-more">Tìm hiểu thêm</p>
+              <i className="add-to-cart ri-shopping-cart-2-line"></i>
             </div>
           </div>
         </Flex>

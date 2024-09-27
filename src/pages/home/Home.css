@@ -53,8 +53,9 @@
   font-family: "MyCustomFont";
 }
 .home-page .product-sell .product-item {
-  height: 590px;
-  width: 520px;
+  /* height: 590px; */
+  width: 440px;
+  margin-bottom: 2%;
 }
 
 .home-page .product-sell .product-item .product-information {
@@ -79,7 +80,7 @@
   height: 234px;
   border-radius: 20px;
   border: #1b392d solid 1px;
-  width: 440px;
+  width: 100%;
   object-fit: cover;
 }
 .home-page .product-sell .product-item .product-information .money {
@@ -97,7 +98,7 @@
 }
 .home-page .product-sell .product-item .product-action .see-more {
   border: 1px #1b392d solid;
-  padding: 20px 130px;
+  padding: 20px 20%;
   color: #1b392d;
   border-radius: 20px;
   text-align: center;
@@ -136,7 +137,7 @@
   margin-bottom: 40px;
 }
 .home-page .kofee-bean-to-brew .bean-to-brew {
-  margin: 10px 200px;
+  margin: 1% 10%;
 }
 .image-bean-to-brew {
   width: 100%;

@@ -19,7 +19,7 @@ export default function BeanToBrew() {
     fontSize: "14px",
     fontWeight: "bold",
     color: "#1b392d",
-    paddingLeft: "30px",
+    paddingLeft: "4%",
   };
 
   const items = [
@@ -88,8 +88,8 @@ export default function BeanToBrew() {
 
   return (
     <div>
-      <Flex gap={40} wrap="wrap">
-        <Col md={11} sm={24}>
+      <Flex gap={40} justify="space-evenly" wrap="wrap">
+        <div style={{ width: "48%" }}>
           {activeKey == "1" ? (
             <img
               className="image-bean-to-brew"
@@ -126,8 +126,8 @@ export default function BeanToBrew() {
               style={{ width: "100%" }}
             />
           )}
-        </Col>
-        <Col md={11} sm={24}>
+        </div>
+        <div style={{ width: "48%" }}>
           <ConfigProvider
             theme={{
               token: {
@@ -174,7 +174,7 @@ export default function BeanToBrew() {
               )}
             />
           </ConfigProvider>
-        </Col>
+        </div>
       </Flex>
     </div>
   );

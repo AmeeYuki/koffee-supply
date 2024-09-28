@@ -17,7 +17,7 @@ function Home() {
           </div>
           <div className="content">
             <p className="title">
-              BỊCH KO-FEE
+              BỊCH KO-FEEa
               <br /> CÓ 102
             </p>
             <p>Để có một bịch KO-FEE của riêng bạn:</p>

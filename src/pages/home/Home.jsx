@@ -1,7 +1,6 @@
 import { Button, Col, Flex, Row } from "antd";
 import "./Home.css";
 import BeanToBrew from "./BeanToBrew";
-import KofeeTeams from "./KofeeTeams";
 import Carousele from "./Caurosel";
 function Home() {
   return (
@@ -116,12 +115,7 @@ function Home() {
           <BeanToBrew />
         </div>
       </div>
-      {/* <div className="kofee-team">
-        <div className="header">KO-FEE TEAMS</div>
-        <div>
-          <KofeeTeams />
-        </div>
-      </div> */}
+
       <div className="kofee-team">
         <div className="header">KO-FEE TEAMS</div>
         <Carousele />

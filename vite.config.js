@@ -5,6 +5,12 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Để Vite xử lý lỗi 404 cho các đường dẫn không tồn tại
+        entryFileNames: `index.html`,
+      },
   base: "/",
   server: {
     port: 3000,

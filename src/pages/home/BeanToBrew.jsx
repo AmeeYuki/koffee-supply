@@ -88,8 +88,8 @@ export default function BeanToBrew() {
 
   return (
     <div>
-      <Flex gap={40} justify="space-evenly" wrap="wrap">
-        <div style={{ width: "48%" }}>
+      <Flex justify="space-evenly" wrap="wrap">
+        <div style={{ width: "50%" }}>
           {activeKey == "1" ? (
             <img
               className="image-bean-to-brew"
@@ -127,7 +127,7 @@ export default function BeanToBrew() {
             />
           )}
         </div>
-        <div style={{ width: "48%" }}>
+        <div style={{ width: "100vh" }}>
           <ConfigProvider
             theme={{
               token: {

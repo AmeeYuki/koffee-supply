@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { Flex } from "antd";
+import { Flex, Drawer, Badge } from "antd";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import Cart from "../Cart/Cart";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [isCartDrawerVisible, setCartDrawerVisible] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [carts, setCarts] = useState([]);
+  // Retrieve the cart count from localStorage
+  useEffect(() => {
+    const fetchCartCount = () => {
+      const cartData = localStorage.getItem("cart");
+      if (cartData) {
+        const cart = JSON.parse(cartData);
+        setCarts(cart);
+        setCartCount(cart?.length || 0); // Assuming cart is an array of items
+      }
+    };
+
+    fetchCartCount();
+
+    // Optionally, add an event listener to listen for storage changes (if other components update localStorage)
+    window.addEventListener("storage", fetchCartCount);
+
+    return () => {
+      window.removeEventListener("storage", fetchCartCount);
+    };
+  }, []);
+
   const handleProductPage = () => {
     navigate("/products");
   };
@@ -21,6 +46,15 @@ export default function Header() {
   const handleProductDetailPage = () => {
     navigate("/product_detail");
   };
+
+  const showCartDrawer = () => {
+    setCartDrawerVisible(true);
+  };
+
+  const closeCartDrawer = () => {
+    setCartDrawerVisible(false);
+  };
+
   return (
     <>
       <header>
@@ -63,16 +97,24 @@ export default function Header() {
               <div className="cursor">
                 <SearchOutlined style={{ fontSize: "24px", fontWeight: 400 }} />
               </div>
-              <div className="cursor">
-                <ShoppingCartOutlined
-                  onClick={handleCartFinalPage}
-                  style={{ fontSize: "24px", fontWeight: 400 }}
-                />
+              <div onClick={showCartDrawer} className="cursor">
+                <Badge count={cartCount}>
+                  <ShoppingCartOutlined
+                    style={{ fontSize: "24px", fontWeight: 400, color: "#fff" }}
+                  />
+                </Badge>
               </div>
             </Flex>
           </div>
         </Flex>
       </header>
+
+      <Cart
+        cartData={carts}
+        cartCount={cartCount}
+        closeCartDrawer={closeCartDrawer}
+        isCartDrawerVisible={isCartDrawerVisible}
+      />
     </>
   );
 }

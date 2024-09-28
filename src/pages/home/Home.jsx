@@ -7,16 +7,19 @@ function Home() {
   return (
     <div className="home-page">
       <div className="container top">
-        <Flex gap={50} wrap="wrap">
-          <Col sm={24} md={8}>
+        <Flex gap={50} wrap="wrap" justify="space-around">
+          <div>
             <img
-              width={"300px"}
+              width={"400px"}
               src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/kofee_red.png?alt=media&token=408dd306-8bd7-478d-92c2-4c025644fd6e"
               alt="Coffe Logo"
             ></img>
-          </Col>
-          <Col md={12} sm={24} className="content">
-            <p className="title">BỊCH KO-FEE CÓ 102</p>
+          </div>
+          <div className="content">
+            <p className="title">
+              BỊCH KO-FEE
+              <br /> CÓ 102
+            </p>
             <p>Để có một bịch KO-FEE của riêng bạn:</p>
             <ol style={{ marginLeft: 20 }}>
               <li>
@@ -42,7 +45,7 @@ function Home() {
             >
               DIY Cái bịch KO-FEE
             </Button>
-          </Col>
+          </div>
         </Flex>
       </div>
       <div className="kofee-line"></div>
@@ -121,9 +124,7 @@ function Home() {
       </div> */}
       <div className="kofee-team">
         <div className="header">KO-FEE TEAMS</div>
-        <div>
-          <Carousele />
-        </div>
+        <Carousele />
       </div>
     </div>
   );

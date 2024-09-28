@@ -137,7 +137,7 @@
   margin-bottom: 40px;
 }
 .home-page .kofee-bean-to-brew .bean-to-brew {
-  margin: 1% 10%;
+  margin: 1% 1%;
 }
 .image-bean-to-brew {
   width: 100%;
@@ -164,8 +164,8 @@
 }
 .home-page .kofee-team .teammate {
   padding: 20px 20px;
-  width: 664px;
-  height: 310px;
+  max-width: 60%;
+  margin: auto;
   border-radius: 20px;
   background-color: #ddeee3;
   border: 1px solid transparent;
@@ -177,7 +177,7 @@
 }
 .home-page .kofee-team .teammate .description {
   font-size: 16px;
-  padding: 0 20px;
+  padding: 0 2%;
   font-weight: 400;
   margin-bottom: 10px;
 }

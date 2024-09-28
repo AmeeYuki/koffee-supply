@@ -7,7 +7,21 @@ header {
 /* header .cursor {
   cursor: pointer;
 } */
-header .cursor:hover {
+.cursor:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+.make-order-drawer {
+  background-color: #1b392d;
+  color: #d6e0db;
+  text-align: center;
+  padding: 16px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.item-in-cart {
+  border: 2px solid #1b392d;
+  padding: 16px 20px;
+  border-radius: 10px;
 }

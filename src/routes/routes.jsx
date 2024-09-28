@@ -9,8 +9,8 @@ const Product = Loadable({ loader: () => import("../pages/product/Product") });
 const ProductDetail = Loadable({
   loader: () => import("../pages/productDetail/ProductDetail"),
 });
-const CartFinal = Loadable({
-  loader: () => import("../pages/cart/CartFinal"),
+const OrderForm = Loadable({
+  loader: () => import("../pages/order/OrderForm"),
 });
 const DIYKoffe = Loadable({
   loader: () => import("../pages/DIYKoffe/DIYKoffe"),
@@ -43,8 +43,8 @@ export const router = createBrowserRouter([
             element: DIYKoffe,
           },
           {
-            path: "cart_final",
-            element: CartFinal,
+            path: "order-form",
+            element: OrderForm,
           },
           {
             path: "product_detail",

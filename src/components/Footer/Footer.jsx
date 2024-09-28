@@ -40,19 +40,22 @@ export default function Footer() {
 
   return (
     <footer>
-      <Row
+      <Flex
+        justify="space-between"
+        wrap="wrap"
+        gap={20}
         style={{
           padding: "5% 10%",
         }}
       >
-        <Col span={12}>
+        <div>
           <img
             src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/LogoKofee_Footer.png?alt=media&token=8eeffc5b-65ee-4d1d-bbc9-37cedc99398c"
             alt="Logo"
             // style={{ height: "80px" }}
           />{" "}
-        </Col>
-        <Col span={12}>
+        </div>
+        <div style={{ width: "600px" }}>
           <h1 style={{ marginBottom: 20 }}>
             ĐĂNG KÝ ĐỂ NHẬN THÔNG BÁO TỪ KOFFEE NHÉ!
           </h1>
@@ -97,8 +100,8 @@ export default function Footer() {
               </Flex>
             </div>
           </Flex>
-        </Col>
-      </Row>
+        </div>
+      </Flex>
     </footer>
   );
 }

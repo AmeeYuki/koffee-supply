@@ -1,20 +1,22 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-
 import path from "path";
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [react()],
-  build: {
-    rollupOptions: {
-      output: {
-        // Để Vite xử lý lỗi 404 cho các đường dẫn không tồn tại
-        entryFileNames: `index.html`,
-      },
-  base: "/",
+  base: "/", // Đảm bảo rằng đường dẫn gốc là "/"
   server: {
     port: 3000,
     open: true,
+    historyApiFallback: true, // Thêm dòng này để xử lý fallback cho định tuyến phía client khi reload trang
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // Đảm bảo tất cả đường dẫn không xác định đều được phục vụ bởi index.html
+        entryFileNames: "index.html",
+      },
+    },
   },
   css: {
     devSourcemap: true,

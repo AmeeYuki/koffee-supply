@@ -18,10 +18,6 @@ const DIYKoffe = Loadable({
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
-    element: Login,
-  },
-  {
     path: "/",
     element: <AuthGuard />,
 
@@ -49,6 +45,11 @@ export const router = createBrowserRouter([
           {
             path: "product_detail",
             element: ProductDetail,
+          },
+
+          {
+            path: "/login",
+            element: Login,
           },
         ],
       },

@@ -109,7 +109,7 @@ function Home() {
           </div>
         </Flex>
       </div>
-      <div className="kofee-bean-to-brew">
+      <div id="bloger" className="kofee-bean-to-brew">
         <div className="header"> "FROM BEAN TO BREW" </div>
         <div className="bean-to-brew">
           <BeanToBrew />

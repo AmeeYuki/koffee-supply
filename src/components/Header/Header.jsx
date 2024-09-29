@@ -87,7 +87,7 @@ export default function Header() {
             <div className="cursor" onClick={handleProductDetailPage}>
               ProductDetail
             </div>
-            <div className="cursor">Blog</div>
+            {/* <div  className="cursor">Blog</div> */}
           </Flex>
           <div>
             <Flex

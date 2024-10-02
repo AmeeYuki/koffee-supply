@@ -3,13 +3,16 @@ import { Form, Input, Button, Typography, message, Row, Col, Flex } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import ara1 from "../../assets/images/ara1.png";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const Login = () => {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     message.success("Login successful!");
+    navigate("/dashboard-ad-ame");
     // Thực hiện đăng nhập tại đây, ví dụ: gọi API
   };
 

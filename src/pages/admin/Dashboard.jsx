@@ -23,14 +23,8 @@ export default function Dashboard() {
           <StatCard
             name="Total Sales"
             icon={Zap}
-            value="$12,345"
+            value="0 vnd"
             color="#6366F1"
-          />
-          <StatCard
-            name="New Users"
-            icon={Users}
-            value="1,234"
-            color="#8B5CF6"
           />
           <StatCard
             name="Total Products"
@@ -38,20 +32,14 @@ export default function Dashboard() {
             value="567"
             color="#EC4899"
           />
-          <StatCard
-            name="Conversion Rate"
-            icon={BarChart2}
-            value="12.5%"
-            color="#10B981"
-          />
         </motion.div>
 
         {/* CHARTS */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <SalesOverviewChart />
-          <CategoryDistributionChart />
-          <SalesChannelChart />
+          {/* <SalesOverviewChart /> */}
+          {/* <CategoryDistributionChart /> */}
+          {/* <SalesChannelChart /> */}
         </div>
       </main>
     </div>

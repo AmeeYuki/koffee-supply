@@ -9,9 +9,13 @@ import {
   Row,
   Col,
   Image,
+  Space,
   Flex,
+  notification,
 } from "antd";
 import { VietNamAddress } from "../../data/vietnamAddress"; // Adjust the path as needed
+import { useCreateOrderMutation } from "../../services/orderAPI"; // Import your createOrder mutation
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -26,6 +30,10 @@ export default function OrderForm() {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
+  const navigate = useNavigate();
+
+  // Using the createOrder mutation
+  const [createOrder] = useCreateOrderMutation();
 
   useEffect(() => {
     const handleCartUpdate = () => {
@@ -44,34 +52,66 @@ export default function OrderForm() {
 
   const handleProvinceChange = (value) => {
     setSelectedProvince(value);
-    const province = VietNamAddress.find((p) => p.Id === value);
+    const province = VietNamAddress.find((p) => p.Name === value); // Use Name instead of Id
     setDistricts(province ? province.Districts : []);
     setWards([]);
   };
 
   const handleDistrictChange = (value) => {
     setSelectedDistrict(value);
-    const district = districts.find((d) => d.Id === value);
+    const district = districts.find((d) => d.Name === value); // Use Name instead of Id
     setWards(district ? district.Wards : []);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
+    // Find the corresponding names for the selected IDs
+    const selectedProvinceName = VietNamAddress.find(
+      (province) => province.Name === selectedProvince
+    )?.Name;
+    const selectedDistrictName = districts.find(
+      (district) => district.Name === selectedDistrict
+    )?.Name;
+    const selectedWardName = wards.find(
+      (ward) => ward.Name === values.ward
+    )?.Name;
+
+    // Calculate total price and shipping cost
     const totalPrice = cartItems.reduce(
       (total, item) => total + item.finalPrice * item.quantity,
       0
     );
-
     const shippingCost = totalPrice >= 500000 ? 0 : 30000;
 
     const formData = {
       ...values,
-      cartItems,
-      totalPrice,
-      shippingCost,
+      city: selectedProvinceName || values.city, // Set name instead of ID
+      district: selectedDistrictName || values.district, // Set name instead of ID
+      ward: selectedWardName || values.ward, // Set name instead of ID
+      orderDetail: cartItems,
+      totalPrice: totalPrice,
+      shippingFee: shippingCost,
     };
+    try {
+      await createOrder(formData).unwrap(); // Use unwrap to handle fulfilled and rejected states
+      notification.success({
+        message: "Order Created",
+        description: "Your order has been placed successfully!",
+        placement: "topRight",
+      });
+      localStorage.removeItem("cart");
 
-    console.log("Form values: ", formData);
-    // Send formData to your API or handle it accordingly
+      window.dispatchEvent(new Event("cartCleared"));
+
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to create order:", error);
+      notification.error({
+        message: "Order Failed",
+        description:
+          "There was an error creating your order. Please try again.",
+        placement: "topRight",
+      });
+    }
   };
 
   const totalPrice = cartItems.reduce(
@@ -82,7 +122,7 @@ export default function OrderForm() {
   const shippingCost = totalPrice >= 500000 ? 0 : 30000;
 
   return (
-    <Row className="" style={{ margin: "5%" }}>
+    <Row style={{ margin: "5%" }}>
       <Col lg={11} md={11} sm={24} xs={24}>
         <Title level={3}>Liên hệ</Title>
         <Form form={form} onFinish={handleSubmit}>
@@ -100,31 +140,35 @@ export default function OrderForm() {
           </Form.Item>
           <Title level={4}>Thông tin giao hàng</Title>
           <Form.Item
-            name="fullName"
+            name="customerName"
             rules={[
-              { required: true, message: "Please input your last name!" },
+              { required: true, message: "Please input your full name!" },
             ]}
           >
             <Input placeholder="Họ và Tên" />
           </Form.Item>
           <Form.Item
             name="city"
-            rules={[{ required: true, message: "Please input your city!" }]}
+            rules={[
+              { required: true, message: "Please select your province!" },
+            ]}
           >
             <Select
               placeholder="Chọn Tỉnh/Thành phố"
               onChange={handleProvinceChange}
             >
               {VietNamAddress.map((province) => (
-                <Select.Option key={province.Id} value={province.Id}>
+                <Option key={province.Id} value={province.Name}>
                   {province.Name}
-                </Select.Option>
+                </Option>
               ))}
             </Select>
           </Form.Item>
           <Form.Item
             name="district"
-            rules={[{ required: true, message: "Please input your district!" }]}
+            rules={[
+              { required: true, message: "Please select your district!" },
+            ]}
           >
             <Select
               placeholder="Chọn Quận/Huyện"
@@ -132,21 +176,21 @@ export default function OrderForm() {
               disabled={!districts.length}
             >
               {districts.map((district) => (
-                <Select.Option key={district.Id} value={district.Id}>
+                <Option key={district.Id} value={district.Name}>
                   {district.Name}
-                </Select.Option>
+                </Option>
               ))}
             </Select>
           </Form.Item>
           <Form.Item
             name="ward"
-            rules={[{ required: true, message: "Please input your ward!" }]}
+            rules={[{ required: true, message: "Please select your ward!" }]}
           >
             <Select placeholder="Chọn Phường/Xã" disabled={!wards.length}>
               {wards.map((ward) => (
-                <Select.Option key={ward.Id} value={ward.Id}>
+                <Option key={ward.Id} value={ward.Name}>
                   {ward.Name}
-                </Select.Option>
+                </Option>
               ))}
             </Select>
           </Form.Item>
@@ -187,7 +231,7 @@ export default function OrderForm() {
               textAlign: "center",
               padding: "10px",
               marginTop: 10,
-              border: "1px dashed, #8e2626",
+              border: "1px dashed #8e2626",
               borderRadius: 10,
             }}
           >
@@ -195,10 +239,10 @@ export default function OrderForm() {
           </div>
           <Divider />
           <Title level={4}>Phương thức thanh toán</Title>
-          <Flex justify="space-between">
+          <Space style={{ justifyContent: "space-between" }}>
             <Title level={5}>Phương thức thanh toán</Title>
-            <Text value="cod">Thanh toán khi nhận hàng</Text>
-          </Flex>
+            <Text>Thanh toán khi nhận hàng</Text>
+          </Space>
           <Button
             style={{
               backgroundColor: "#1b392d",

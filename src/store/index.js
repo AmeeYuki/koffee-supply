@@ -7,6 +7,7 @@ import productReducer from "../slices/product.slice";
 import { flowerApi } from "../services/flowerApi";
 import { productAPI } from "../services/productApi";
 import { typeAPI } from "../services/typeApi";
+import { orderAPI } from "../services/orderApi";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ export const store = configureStore({
     [flowerApi.reducerPath]: flowerApi.reducer,
     [productAPI.reducerPath]: productAPI.reducer,
     [typeAPI.reducerPath]: typeAPI.reducer,
+    [orderAPI.reducerPath]: orderAPI.reducer,
     flower: persistedReducer,
     product: productReducer,
   },
@@ -30,6 +32,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       flowerApi.middleware,
       productAPI.middleware,
+      orderAPI.middleware,
       typeAPI.middleware
     ),
 });

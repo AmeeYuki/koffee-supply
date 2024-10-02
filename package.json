@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^2.1.0",
     "antd": "^5.20.6",
+    "dayjs": "^1.11.13",
     "firebase": "^10.13.0",
     "framer-motion": "^11.9.0",
     "lucide-react": "^0.446.0",

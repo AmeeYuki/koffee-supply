@@ -13,6 +13,7 @@ export default function ArabicaMangDen() {
     fontFamily: "MyCustomFont",
     color: "#1b392d",
     borderRadius: "20px",
+    width: "100%",
   };
 
   const bodyStyle = {
@@ -97,8 +98,8 @@ export default function ArabicaMangDen() {
 
   return (
     <div className="container">
-      <Flex justify="space-around" wrap="wrap">
-        <div style={{ width: "40%" }}>
+      <Flex justify="space-around" wrap="wrap" gap={20}>
+        <div style={{ margin: "0 2%", width: 600 }}>
           <ConfigProvider
             theme={{
               token: {

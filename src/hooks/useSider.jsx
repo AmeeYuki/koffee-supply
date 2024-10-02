@@ -16,12 +16,12 @@ const useSider = () => {
       {
         label: "Dashboard",
         icon: <SolutionOutlined />,
-        href: "/",
+        href: "/dashboard",
       },
       {
         label: "Home",
         icon: <FieldTimeOutlined />,
-        href: "home",
+        href: "/home",
       },
     ];
   }, []);

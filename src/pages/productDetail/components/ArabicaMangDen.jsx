@@ -97,8 +97,8 @@ export default function ArabicaMangDen() {
 
   return (
     <div className="container">
-      <Flex justify="space-around" wrap="wrap" gap={20}>
-        <div style={{ width: "600px" }}>
+      <Flex justify="space-around" wrap="wrap">
+        <div style={{ width: "40%" }}>
           <ConfigProvider
             theme={{
               token: {
@@ -124,7 +124,7 @@ export default function ArabicaMangDen() {
             />
           </ConfigProvider>
         </div>
-        <div style={{ width: "600px" }}>
+        <div style={{}}>
           {activeKey == "1" ? (
             <img
               className="image-bean-to-brew"

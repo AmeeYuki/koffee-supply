@@ -3,11 +3,22 @@ import { Col, Flex, Row, Tag, message } from "antd";
 import containerIcon from "../../../assets/icon/Container.png";
 import DescriptionMore from "./DescriptionMore";
 
-export default function ProductInformation({ onAddToCart }) {
-  const [selectedSize, setSelectedSize] = useState(1); // Default to first value
-  const [selectedWeight, setSelectedWeight] = useState(1); // Default to first weight value
-  const [selectedBag, setSelectedBag] = useState(1); // Default to first bag value
+export default function ProductInformation({ onAddToCart, product }) {
+  const [selectedSize, setSelectedSize] = useState("Nguyên Hạt"); // Default to first value (text)
+  const [selectedWeight, setSelectedWeight] = useState(100); // Default to first weight value
+  const [selectedBag, setSelectedBag] = useState("Xanh"); // Default to the color "Xanh"
   const [quantity, setQuantity] = useState(1); // Default quantity value
+  const [finalPrice, setFinalPrice] = useState(product?.price); // Default final price
+
+  useEffect(() => {
+    // If the product type matches a specific ID, calculate final price based on weight
+    if (product?.type._id === "66eda5ab30bd8d4bcb684cd7") {
+      setFinalPrice(((product?.price * selectedWeight) / 1000) * quantity);
+    } else {
+      // Otherwise, just set the price as it is
+      setFinalPrice(product?.price * quantity);
+    }
+  }, [selectedWeight, quantity, product]);
 
   const handleSizeSelect = (value) => {
     setSelectedSize(value);
@@ -31,165 +42,131 @@ export default function ProductInformation({ onAddToCart }) {
 
   const handleAddToCart = () => {
     const newItem = {
-      productId: "66e46da62a8b9f173ec66fb9", // Replace this with the actual product ID
+      productId: product._id,
+      product: product,
       size: selectedSize,
       weight: selectedWeight,
       bag: selectedBag,
       quantity,
+      finalPrice,
     };
     onAddToCart(newItem); // Pass the new item to the parent function
   };
 
   return (
     <div className="product-detail">
-      <p className="title">Arabica Cầu dất</p>
+      <p className="title">{product?.productName}</p>
       <div>
-        <Tag color="red" style={{ fontWeight: "600", color: "red" }}>
-          Ngon
-        </Tag>
-        <Tag color="red" style={{ fontWeight: "600", color: "red" }}>
-          Ngon
-        </Tag>
-        <Tag color="red" style={{ fontWeight: "600", color: "red" }}>
-          Ngon
-        </Tag>
-      </div>
-      <p className="description">
-        Dark, bold, and intensely energizing black coffee with extra strength.
-      </p>
-
-      {/* Size Selection */}
-      <div className="radio-group">
-        <p style={{ marginBottom: 16, color: "#63A484", fontWeight: "700" }}>
-          Cỡ hạt:
-        </p>
-        {[1, 2, 3, 4].map((value) => (
-          <button
-            key={value}
-            className={`radio-button ${
-              selectedSize === value ? "selected" : ""
-            }`}
-            onClick={() => handleSizeSelect(value)}
+        {product?.tags.map((tag, index) => (
+          <Tag
+            key={index}
+            color="red"
+            style={{ fontWeight: "600", color: "red", marginBottom: 16 }}
           >
-            {value === 1
-              ? "Nguyên Hạt"
-              : value === 2
-              ? "Thô"
-              : value === 3
-              ? "Vừa"
-              : "Mịn"}
-          </button>
+            {tag?.tagName}
+          </Tag>
         ))}
       </div>
-
-      {/* Weight Selection */}
-      <div className="radio-group">
-        <p
-          style={{
-            marginTop: 16,
-            marginBottom: 16,
-            color: "#63A484",
-            fontWeight: "700",
-          }}
-        >
-          Khối lượng:
+      <div>
+        <p style={{ marginBottom: 16, color: "#1b392d", fontSize: 16 }}>
+          <b>Loại sản phẩm: </b>
+          {product?.type?.typeName}
         </p>
-        {[1, 2, 3].map((value) => (
-          <button
-            key={value}
-            className={`radio-button-weight ${
-              selectedWeight === value ? "selected" : ""
-            }`}
-            onClick={() => handleWeightSelect(value)}
-          >
-            {value === 1 && (
-              <>
-                <p className="style-gram">100 Gram</p>
-                <p>
-                  <b>100.000</b> / Bịch
-                </p>
-              </>
-            )}
-            {value === 2 && (
-              <>
-                <p className="style-gram">200 Gram</p>
-                <p>
-                  <b>200.000</b> / Bịch
-                </p>
-              </>
-            )}
-            {value === 3 && (
-              <>
-                <p className="style-gram">500 Gram</p>
-                <p>
-                  <b>500.000</b> / Bịch
-                </p>
-              </>
-            )}
-          </button>
-        ))}
       </div>
-
-      {/* Bag Selection */}
-      <div className="radio-group">
-        <p
-          style={{
-            marginTop: 16,
-            marginBottom: 16,
-            color: "#63A484",
-            fontWeight: "700",
-          }}
-        >
-          Túi đựng KOFEE:
-        </p>
-        {[1, 2, 3].map((value) => (
-          <button
-            key={value}
-            className={`radio-button-bag ${
-              selectedBag === value ? "selected" : ""
-            }`}
-            onClick={() => handleBagSelect(value)}
-          >
-            {value === 1 && (
-              <p
-                style={{
-                  backgroundColor: "#1b392d",
-                  padding: "15px 80px 15px 10px ",
-                  borderRadius: "10px",
-                }}
-                className="style-bag"
+      <p className="description">{product?.description} </p>
+      {product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
+        <>
+          {/* Size Selection */}
+          <div className="radio-group">
+            <p
+              style={{ marginBottom: 16, color: "#63A484", fontWeight: "700" }}
+            >
+              Cỡ hạt:
+            </p>
+            {["Nguyên Hạt", "Thô", "Vừa", "Mịn"].map((value) => (
+              <button
+                key={value}
+                className={`radio-button ${
+                  selectedSize === value ? "selected" : ""
+                }`}
+                onClick={() => handleSizeSelect(value)}
               >
-                Xanh
-              </p>
-            )}
-            {value === 2 && (
-              <p
-                style={{
-                  backgroundColor: "#8e2626",
-                  padding: "15px 80px 15px 10px ",
-                  borderRadius: "10px",
-                }}
-                className="style-bag"
+                {value}
+              </button>
+            ))}
+          </div>
+          {/* Weight Selection */}
+          <div className="radio-group">
+            <p
+              style={{
+                marginTop: 16,
+                marginBottom: 16,
+                color: "#63A484",
+                fontWeight: "700",
+              }}
+            >
+              Khối lượng:
+            </p>
+            {[100, 250, 500].map((value) => (
+              <button
+                key={value}
+                className={`radio-button-weight ${
+                  selectedWeight === value ? "selected" : ""
+                }`}
+                onClick={() => handleWeightSelect(value)}
               >
-                Đỏ
-              </p>
-            )}
-            {value === 3 && (
-              <p
-                style={{
-                  backgroundColor: "#e05353",
-                  padding: "15px 80px 15px 10px ",
-                  borderRadius: "10px",
-                }}
-                className="style-bag"
+                <p className="style-gram">{value} Gram</p>
+                <p>
+                  <b>
+                    {((product?.price * value) / 1000).toLocaleString() +
+                      " VND"}
+                  </b>{" "}
+                  / Bịch
+                </p>
+              </button>
+            ))}
+          </div>
+          {/* Bag Selection */}
+          <div className="radio-group">
+            <p
+              style={{
+                marginTop: 16,
+                marginBottom: 16,
+                color: "#63A484",
+                fontWeight: "700",
+              }}
+            >
+              Túi đựng KOFEE:
+            </p>
+            {["Xanh", "Đỏ", "Hồng"].map((color) => (
+              <button
+                key={color}
+                className={`radio-button-bag ${
+                  selectedBag === color ? "selected" : ""
+                }`}
+                onClick={() => handleBagSelect(color)}
               >
-                Hồng
-              </p>
-            )}
-          </button>
-        ))}
-      </div>
-
+                <p
+                  style={{
+                    backgroundColor:
+                      color === "Xanh"
+                        ? "#1b392d"
+                        : color === "Đỏ"
+                        ? "#8e2626"
+                        : "#e05353",
+                    padding: "15px 80px 15px 10px ",
+                    borderRadius: "10px",
+                    color: "#fff",
+                  }}
+                  className="style-bag"
+                >
+                  {color}
+                </p>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
       {/* Quantity Selection */}
       <div className="quantity-selection">
         <p style={{ marginBottom: 16, color: "#63A484", fontWeight: "700" }}>
@@ -222,7 +199,7 @@ export default function ProductInformation({ onAddToCart }) {
         justify="space-around"
         align="center"
         gap={20}
-        className="giao-hang"
+        className="giao-hang "
       >
         <img src={containerIcon} width={40}></img>
         <p
@@ -237,9 +214,11 @@ export default function ProductInformation({ onAddToCart }) {
           500.000 VND
         </p>
       </Flex>
-      <div>
-        <DescriptionMore />
-      </div>
+      {product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
+        <div>
+          <DescriptionMore product={product} />
+        </div>
+      )}
     </div>
   );
 }

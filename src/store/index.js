@@ -6,6 +6,7 @@ import flowerReducer from "../slices/flower.slice";
 import productReducer from "../slices/product.slice";
 import { flowerApi } from "../services/flowerApi";
 import { productAPI } from "../services/productApi";
+import { typeAPI } from "../services/typeApi";
 
 const persistConfig = {
   key: "root",
@@ -21,11 +22,16 @@ export const store = configureStore({
   reducer: {
     [flowerApi.reducerPath]: flowerApi.reducer,
     [productAPI.reducerPath]: productAPI.reducer,
+    [typeAPI.reducerPath]: typeAPI.reducer,
     flower: persistedReducer,
     product: productReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(flowerApi.middleware, productAPI.middleware),
+    getDefaultMiddleware().concat(
+      flowerApi.middleware,
+      productAPI.middleware,
+      typeAPI.middleware
+    ),
 });
 
 // Add a dictionary to keep track of the registered async reducers

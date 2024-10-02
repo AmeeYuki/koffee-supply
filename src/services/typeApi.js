@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../config";
 // import { selectToken } from "../slices/auth.slice";
 
-export const productAPI = createApi({
-  reducerPath: "productManagement",
-  tagTypes: ["ProductList"],
+export const typeAPI = createApi({
+  reducerPath: "typeManagement",
+  tagTypes: ["TypeList"],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     // prepareHeaders: (headers, { getState }) => {
@@ -17,15 +17,11 @@ export const productAPI = createApi({
     // },
   }),
   endpoints: (builder) => ({
-    getAllProduct: builder.query({
-      query: () => `products`,
-      providesTags: ["ProductList"],
-    }),
-    getProductById: builder.query({
-      query: (id) => `/products/${id}`,
-      providesTags: ["ProductList"],
+    getTypes: builder.query({
+      query: () => `types`,
+      providesTags: ["TypeList"],
     }),
   }),
 });
 
-export const { useGetAllProductQuery, useLazyGetProductByIdQuery } = productAPI;
+export const { useGetTypesQuery } = typeAPI;

@@ -56,9 +56,10 @@
   padding: 20px;
 }
 .product-list-space .product-item .product-information img {
+  user-select: none;
   width: 100%;
-  min-height: 240px;
-  object-fit: cover;
+  max-height: 240px;
+  object-fit: contain;
   margin-bottom: 10px;
   border-radius: 12px;
 }
@@ -96,12 +97,12 @@
 .product-list-space .product-item .product-action .see-more {
   border: #1b392d 1px solid;
   text-align: center;
-  padding: 20px 50px;
+  padding: 22px 50px;
   width: 70%;
   border-radius: 12px;
   font-size: 16px;
   color: #1b392d;
-  font-weight: 400;
+  font-weight: 800;
 }
 .product-list-space .product-item .product-action .see-more:hover {
   opacity: 0.9;

@@ -10,47 +10,46 @@ export default function Header() {
   const [isCartDrawerVisible, setCartDrawerVisible] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [carts, setCarts] = useState([]);
-  // Retrieve the cart count from localStorage
+
   useEffect(() => {
     const fetchCartCount = () => {
       const cartData = localStorage.getItem("cart");
       if (cartData) {
         const cart = JSON.parse(cartData);
         setCarts(cart);
-        setCartCount(cart?.length || 0); // Assuming cart is an array of items
+        setCartCount(cart.length);
+      } else {
+        setCarts([]);
+        setCartCount(0);
       }
     };
 
-    fetchCartCount();
+    fetchCartCount(); // Fetch initial cart count
 
-    // Optionally, add an event listener to listen for storage changes (if other components update localStorage)
-    window.addEventListener("storage", fetchCartCount);
+    const handleCartUpdate = () => {
+      fetchCartCount(); // Refresh cart count when updated
+    };
+
+    const handleCartCleared = () => {
+      setCarts([]); // Clear cart on cartCleared event
+      setCartCount(0); // Reset cart count
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+    window.addEventListener("cartCleared", handleCartCleared);
 
     return () => {
-      window.removeEventListener("storage", fetchCartCount);
+      window.removeEventListener("cartUpdated", handleCartUpdate);
+      window.removeEventListener("cartCleared", handleCartCleared);
     };
   }, []);
 
-  const handleProductPage = () => {
-    navigate("/products");
-  };
-  const handleHomePage = () => {
-    navigate("/");
-  };
-  const handleDIYPage = () => {
-    navigate("/diy_Koffe");
-  };
-  const handleCartFinalPage = () => {
-    navigate("/cart_final");
-  };
-  const handleProductDetailPage = () => {
-    navigate("/product_detail");
-  };
-
+  // Show the cart drawer
   const showCartDrawer = () => {
     setCartDrawerVisible(true);
   };
 
+  // Close the cart drawer
   const closeCartDrawer = () => {
     setCartDrawerVisible(false);
   };
@@ -65,7 +64,7 @@ export default function Header() {
         >
           <div>
             <img
-              onClick={handleHomePage}
+              onClick={() => navigate("/")}
               src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/Ko-fee_Logo-Heder.png?alt=media&token=e818d248-d5c2-443a-834f-d352a2e6f834"
               alt="Logo"
               style={{ height: "80px" }}
@@ -75,19 +74,18 @@ export default function Header() {
             justify="space-around"
             style={{ gap: "40px", fontWeight: "500" }}
           >
-            <div className="cursor" onClick={handleHomePage}>
+            <div className="cursor" onClick={() => navigate("/")}>
               Về KO-FEE
             </div>
-            <div onClick={handleProductPage} className="cursor">
+            <div onClick={() => navigate("/products")} className="cursor">
               Sản phẩm
             </div>
-            <div className="cursor" onClick={handleDIYPage}>
+            <div className="cursor" onClick={() => navigate("/diy_Koffe")}>
               DIY cái bịch KO-FEE
             </div>
-            <div className="cursor" onClick={handleProductDetailPage}>
-              ProductDetail
+            <div className="cursor" onClick={() => navigate("/")}>
+              Blog
             </div>
-            {/* <div  className="cursor">Blog</div> */}
           </Flex>
           <div>
             <Flex
@@ -112,6 +110,8 @@ export default function Header() {
       <Cart
         cartData={carts}
         cartCount={cartCount}
+        setCartCount={setCartCount} // Pass the setter to update the count from Cart component
+        setCarts={setCarts} // Pass setter to update cart data
         closeCartDrawer={closeCartDrawer}
         isCartDrawerVisible={isCartDrawerVisible}
       />

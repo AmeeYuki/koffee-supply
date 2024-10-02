@@ -1,10 +1,13 @@
 .product-detail-page {
   padding: 20px 0px;
+  /* margin: 0 20px; */
 }
 .product-detail-page .header-breadcrumb {
   display: flex;
   gap: 20px;
   align-items: center;
+  margin: 0 5%;
+  cursor: pointer;
 }
 .product-detail-page .header-breadcrumb .icon-breadcrumb {
   color: #1b392d;
@@ -16,7 +19,9 @@
   font-size: 12px;
 }
 .product-detail-page .product-space {
-  margin-top: 40px;
+  margin-top: 60px;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 .product-detail-page .product-detail .title {
   color: #1b392d;
@@ -94,7 +99,6 @@
 .product-detail-page .style-gram {
   font-family: "MyCustomFont";
   font-size: 14px;
-  margin-bottom: 8px;
 }
 .product-detail-page .radio-button-bag {
   /* background-color: transparent; */
@@ -112,9 +116,11 @@
 }
 
 .product-detail-page .radio-button-bag.selected {
-  opacity: 0.4;
+  opacity: 0.8;
   border: 2px #828282 solid;
-  border-radius: 10px;
+  border-radius: 14px;
+  border: #000000 solid 3px;
+
   /* font-size: 50px; */
 }
 .product-detail-page .style-bag {
@@ -164,10 +170,11 @@
   box-shadow: 1px 1px 1px 1px #7b7b7bd2;
 }
 .product-detail-page .giao-hang {
-  margin: 20px 0;
+  margin: 20px 0px;
   border-radius: 10px;
   border: #f0cac7 3px dashed;
   padding: 30px 10px;
+  width: 100%;
 }
 .product-detail-page .under-product-detail .bg-upd {
   background-image: url("../../assets/images/backgroundProductInfoMore.png");

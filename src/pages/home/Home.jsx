@@ -2,7 +2,9 @@ import { Button, Col, Flex, Row } from "antd";
 import "./Home.css";
 import BeanToBrew from "./BeanToBrew";
 import Carousele from "./Caurosel";
+import { useNavigate } from "react-router-dom";
 function Home() {
+  const navigate = useNavigate();
   return (
     <div className="home-page">
       <div className="container top">
@@ -16,11 +18,13 @@ function Home() {
           </div>
           <div className="content">
             <p className="title">
-              BỊCH KO-FEEa
+              BỊCH KO-FEE
               <br /> CÓ 102
             </p>
             <p>Để có một bịch KO-FEE của riêng bạn:</p>
-            <ol style={{ marginLeft: 20 }}>
+            <ol
+              style={{ marginLeft: 20, width: "90%", listStyleType: "revert" }}
+            >
               <li>
                 Chọn mix loại hạt cà phê bạn thích, Arabica tinh tế với Robusta
                 đậm đà,...
@@ -84,8 +88,20 @@ function Home() {
               <p className="money">400.000 vnđ | 1kg</p>
             </div>
             <div className="product-action">
-              <p className="see-more">Tìm hiểu thêm</p>
-              <i className="add-to-cart ri-shopping-cart-2-line"></i>
+              <p
+                className="see-more"
+                onClick={() => {
+                  navigate("/product_detail/66facbb9f39fd8b02d2e71bc");
+                }}
+              >
+                Tìm hiểu thêm
+              </p>
+              <i
+                onClick={() => {
+                  navigate("/product_detail/66facbb9f39fd8b02d2e71bc");
+                }}
+                className="add-to-cart ri-shopping-cart-2-line"
+              ></i>
             </div>
           </div>
 
@@ -103,13 +119,25 @@ function Home() {
               <p className="money">400.000 vnđ | 1kg</p>
             </div>
             <div className="product-action">
-              <p className="see-more">Tìm hiểu thêm</p>
-              <i className="add-to-cart ri-shopping-cart-2-line"></i>
+              <p
+                onClick={() => {
+                  navigate("/product_detail/66facccc139d39971f67ac56");
+                }}
+                className="see-more"
+              >
+                Tìm hiểu thêm
+              </p>
+              <i
+                onClick={() => {
+                  navigate("/product_detail/66facccc139d39971f67ac56");
+                }}
+                className="add-to-cart ri-shopping-cart-2-line"
+              ></i>
             </div>
           </div>
         </Flex>
       </div>
-      <div id="bloger" className="kofee-bean-to-brew">
+      <div id="blogs" className="kofee-bean-to-brew">
         <div className="header"> "FROM BEAN TO BREW" </div>
         <div className="bean-to-brew">
           <BeanToBrew />

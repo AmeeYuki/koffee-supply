@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Input,
@@ -8,11 +8,11 @@ import {
   Divider,
   Row,
   Col,
-  Flex,
   Image,
+  Flex,
 } from "antd";
-
 import { VietNamAddress } from "../../data/vietnamAddress"; // Adjust the path as needed
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -22,11 +22,31 @@ export default function OrderForm() {
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCartItems(JSON.parse(storedCart));
+      }
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+
+    return () => {
+      window.removeEventListener("cartUpdated", handleCartUpdate);
+    };
+  }, []);
+
   const handleProvinceChange = (value) => {
     setSelectedProvince(value);
     const province = VietNamAddress.find((p) => p.Id === value);
     setDistricts(province ? province.Districts : []);
-    setWards([]); // Reset wards when province changes
+    setWards([]);
   };
 
   const handleDistrictChange = (value) => {
@@ -34,12 +54,35 @@ export default function OrderForm() {
     const district = districts.find((d) => d.Id === value);
     setWards(district ? district.Wards : []);
   };
+
   const handleSubmit = (values) => {
-    console.log("Form values: ", values);
+    const totalPrice = cartItems.reduce(
+      (total, item) => total + item.finalPrice * item.quantity,
+      0
+    );
+
+    const shippingCost = totalPrice >= 500000 ? 0 : 30000;
+
+    const formData = {
+      ...values,
+      cartItems,
+      totalPrice,
+      shippingCost,
+    };
+
+    console.log("Form values: ", formData);
+    // Send formData to your API or handle it accordingly
   };
 
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.finalPrice * item.quantity,
+    0
+  );
+
+  const shippingCost = totalPrice >= 500000 ? 0 : 30000;
+
   return (
-    <Row className="container" style={{ padding: "20px" }}>
+    <Row className="" style={{ margin: "5%" }}>
       <Col lg={11} md={11} sm={24} xs={24}>
         <Title level={3}>Liên hệ</Title>
         <Form form={form} onFinish={handleSubmit}>
@@ -55,9 +98,7 @@ export default function OrderForm() {
           >
             <Input placeholder="Email" />
           </Form.Item>
-
           <Title level={4}>Thông tin giao hàng</Title>
-
           <Form.Item
             name="fullName"
             rules={[
@@ -66,8 +107,6 @@ export default function OrderForm() {
           >
             <Input placeholder="Họ và Tên" />
           </Form.Item>
-
-          {/* thanh pho */}
           <Form.Item
             name="city"
             rules={[{ required: true, message: "Please input your city!" }]}
@@ -83,15 +122,14 @@ export default function OrderForm() {
               ))}
             </Select>
           </Form.Item>
-          {/* District selection */}
           <Form.Item
             name="district"
-            rules={[{ required: true, message: "Please input your city!" }]}
+            rules={[{ required: true, message: "Please input your district!" }]}
           >
             <Select
               placeholder="Chọn Quận/Huyện"
               onChange={handleDistrictChange}
-              disabled={!districts.length} // Disable if no province is selected
+              disabled={!districts.length}
             >
               {districts.map((district) => (
                 <Select.Option key={district.Id} value={district.Id}>
@@ -100,11 +138,9 @@ export default function OrderForm() {
               ))}
             </Select>
           </Form.Item>
-
-          {/* Ward selection */}
           <Form.Item
             name="ward"
-            rules={[{ required: true, message: "Please input your city!" }]}
+            rules={[{ required: true, message: "Please input your ward!" }]}
           >
             <Select placeholder="Chọn Phường/Xã" disabled={!wards.length}>
               {wards.map((ward) => (
@@ -114,14 +150,12 @@ export default function OrderForm() {
               ))}
             </Select>
           </Form.Item>
-
           <Form.Item
             name="address"
             rules={[{ required: true, message: "Please input your address!" }]}
           >
             <Input placeholder="Địa chỉ" />
           </Form.Item>
-
           <Form.Item
             name="phone"
             rules={[
@@ -130,11 +164,22 @@ export default function OrderForm() {
           >
             <Input placeholder="Số điện thoại" />
           </Form.Item>
-
+          <Form.Item name="note">
+            <Input.TextArea placeholder="Ghi chú" />
+          </Form.Item>
+          <p style={{ color: "#1b392d", fontWeight: 600 }}>
+            Nếu bạn tặng ai món quà này hãy ghi lời chúc cho Kơ-fee biết nhé:
+          </p>
+          <Form.Item name="letterSend">
+            <Input.TextArea placeholder="Lời chúc" />
+          </Form.Item>
           <Divider />
-
           <Title level={4}>Phương thức giao hàng</Title>
-          <Text>GHTK - 30,000 VND</Text>
+          <Text>
+            {shippingCost > 0
+              ? `GHTK - ${shippingCost.toLocaleString()} VND`
+              : "GHTK - MIỄN PHÍ"}
+          </Text>
           <div
             style={{
               color: "#8e2626",
@@ -149,14 +194,11 @@ export default function OrderForm() {
             <b>MIỄN PHÍ GIAO HÀNG</b> CHO ĐƠN TRÊN 500.000 VND
           </div>
           <Divider />
-
           <Title level={4}>Phương thức thanh toán</Title>
-
           <Flex justify="space-between">
             <Title level={5}>Phương thức thanh toán</Title>
             <Text value="cod">Thanh toán khi nhận hàng</Text>
           </Flex>
-
           <Button
             style={{
               backgroundColor: "#1b392d",
@@ -171,41 +213,53 @@ export default function OrderForm() {
           </Button>
         </Form>
       </Col>
-
+      <Col span={1}></Col>
       <Col
         lg={11}
         md={11}
         sm={24}
         xs={24}
-        offset={1}
-        style={{ paddingLeft: "20px", borderLeft: "1px solid #e0e0e0" }}
+        style={{ padding: "0px 20px", marginTop: 10 }}
       >
         <Title level={3}>Giỏ hàng</Title>
-        <Flex align="center" justify="space-between">
-          <div>
-            <Image
-              src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/kofee_red.png?alt=media&token=408dd306-8bd7-478d-92c2-4c025644fd6e"
-              alt="ima"
-              width={50}
-            ></Image>
-            <Text style={{ marginLeft: 10 }}>Arabica Măng Đen x 1</Text>
-          </div>
-          <Text>300,000 VND</Text>
-        </Flex>
+        {cartItems.map((item) => (
+          <Flex
+            key={item.productId}
+            style={{ marginBottom: 20 }}
+            align="center"
+            justify="space-between"
+          >
+            <Flex align="center">
+              <Image
+                src={item.product.image}
+                alt={item.product.productName}
+                width={50}
+              />
+              <Text style={{ marginLeft: 10 }}>
+                {item.product.productName} x {item.quantity}
+              </Text>
+            </Flex>
+            <Text>{item.finalPrice.toLocaleString()} VND</Text>
+          </Flex>
+        ))}
         <Divider />
         <div>
           <Text>Tổng phụ</Text>
-          <Text style={{ float: "right" }}>300,000 VND</Text>
+          <Text style={{ float: "right" }}>
+            {totalPrice.toLocaleString()} VND
+          </Text>
         </div>
         <div>
           <Text>Vận chuyển</Text>
-          <Text style={{ float: "right" }}>30,000 VND</Text>
+          <Text style={{ float: "right" }}>
+            {shippingCost.toLocaleString()} VND
+          </Text>
         </div>
         <Divider />
         <div>
           <Text strong>Tổng</Text>
           <Text strong style={{ float: "right" }}>
-            330,000 VND
+            {(totalPrice + shippingCost).toLocaleString()} VND
           </Text>
         </div>
       </Col>

@@ -29,7 +29,7 @@ export default function Dashboard() {
           <StatCard
             name="Total Products"
             icon={ShoppingBag}
-            value="567"
+            value="0"
             color="#EC4899"
           />
         </motion.div>

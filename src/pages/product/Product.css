@@ -126,3 +126,6 @@
   opacity: 0.7;
   cursor: pointer;
 }
+.hidden {
+  display: none; /* Ẩn nội dung khi đang loading */
+}

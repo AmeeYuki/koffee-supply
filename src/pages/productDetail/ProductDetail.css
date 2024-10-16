@@ -1,5 +1,5 @@
 .product-detail-page {
-  padding: 20px 0px;
+  padding: 20px 0px 0;
   /* margin: 0 20px; */
 }
 .product-detail-page .header-breadcrumb {
@@ -13,7 +13,9 @@
   color: #1b392d;
   font-size: 32px;
 }
-
+.product-detail-page .product-detail {
+  padding: 0 2%;
+}
 .product-detail-page .header-breadcrumb .breadcrumb-item {
   color: #1b392d;
   font-size: 12px;
@@ -174,7 +176,7 @@
   border-radius: 10px;
   border: #f0cac7 3px dashed;
   padding: 30px 10px;
-  width: 100%;
+  width: 600px;
 }
 .product-detail-page .under-product-detail .bg-upd {
   background-image: url("../../assets/images/backgroundProductInfoMore.png");

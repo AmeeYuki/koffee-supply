@@ -1,6 +1,5 @@
-import React from "react";
 import "./ProductDetail.css";
-import { Col, Flex, Row } from "antd";
+import { Col, Row } from "antd";
 import CarouselImage from "./components/CarouselImage";
 import ProductInformation from "./components/ProductInformation";
 

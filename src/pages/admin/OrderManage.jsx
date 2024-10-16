@@ -9,10 +9,10 @@ import OrdersTable from "../../components/orders/OrdersTable";
 import { useGetAllOrderQuery } from "../../services/orderAPI";
 
 const orderStats = {
-  totalOrders: "1,234",
-  pendingOrders: "56",
-  completedOrders: "1,178",
-  totalRevenue: "$98,765",
+  totalOrders: "0",
+  pendingOrders: "0",
+  completedOrders: "0",
+  totalRevenue: "0",
 };
 
 export default function OrdersPage() {

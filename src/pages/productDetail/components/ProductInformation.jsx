@@ -154,7 +154,7 @@ export default function ProductInformation({ onAddToCart, product }) {
                         : color === "Đỏ"
                         ? "#8e2626"
                         : "#e05353",
-                    padding: "15px 80px 15px 10px ",
+                    padding: "15px 130px 15px 10px ",
                     borderRadius: "10px",
                     color: "#fff",
                   }}
@@ -173,7 +173,7 @@ export default function ProductInformation({ onAddToCart, product }) {
           Số lượng:
         </p>
         <Flex wrap="wrap" gap={20}>
-          <div className="quantity-controls">
+          <div className="quantity-controls" style={{ width: 170 }}>
             <button
               className="decrement"
               onClick={() => handleQuantityChange("decrement")}
@@ -215,7 +215,7 @@ export default function ProductInformation({ onAddToCart, product }) {
         </p>
       </Flex>
       {product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
-        <div>
+        <div style={{ width: 600 }}>
           <DescriptionMore product={product} />
         </div>
       )}

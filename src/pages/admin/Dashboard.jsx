@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import Header from "../../components/common/Header";
 import StatCard from "../../components/common/StatCard";
-import { useGetAllOrderQuery } from "../../services/orderAPI";
+import { useGetAllOrderQuery } from "../../services/orderApi";
 
 export default function Dashboard() {
   const {

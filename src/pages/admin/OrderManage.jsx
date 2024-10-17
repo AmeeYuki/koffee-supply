@@ -3,10 +3,8 @@ import { motion } from "framer-motion";
 
 import Header from "../../components/common/Header";
 import StatCard from "../../components/common/StatCard";
-import DailyOrders from "../../components/orders/DailyOrders";
-import OrderDistribution from "../../components/orders/OrderDistribution";
 import OrdersTable from "../../components/orders/OrdersTable";
-import { useGetAllOrderQuery } from "../../services/orderAPI";
+import { useGetAllOrderQuery } from "../../services/orderAPI.js";
 
 export default function OrdersPage() {
   const {
@@ -23,11 +21,11 @@ export default function OrdersPage() {
     completedOrders: orders
       .filter((order) => order.orderStatus === 3)
       .length.toString(), // Completed orders
-      totalRevenue: orders
-      .filter(order => order.orderStatus === 3) // Only include completed orders
-      .reduce((total, order) => total + order.totalPrice, 0)
-      .toLocaleString("vi-VN") + ' vnđ', // Total revenue formatted
-
+    totalRevenue:
+      orders
+        .filter((order) => order.orderStatus === 3) // Only include completed orders
+        .reduce((total, order) => total + order.totalPrice, 0)
+        .toLocaleString("vi-VN") + " vnđ", // Total revenue formatted
   };
 
   if (isLoadingOrder) {

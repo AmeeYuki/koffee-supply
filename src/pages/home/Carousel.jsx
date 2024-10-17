@@ -59,13 +59,15 @@ export default function Carousele() {
         },
       }}
     >
-      <Carousel arrows infinite={true}>
+      <Carousel autoplay infinite={true}>
         {teammates.map((teammate) => (
           <div key="index">
             <div className="teammate">
-              <p className="title"> "KO-FEE KHÔNG CHỈ LÀ CÀ PHÊ"</p>
-              <p className="description">{teammate.description}</p>
-              <Flex gap={30} align="end" wrap="wrap">
+              <div>
+                <p className="title"> "KO-FEE KHÔNG CHỈ LÀ CÀ PHÊ"</p>
+                <p className="description">{teammate.description}</p>
+              </div>
+              <Flex gap={30} align="end" wrap="wrap" j>
                 <div>
                   <img
                     className="avatar"

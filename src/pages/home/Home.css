@@ -1,7 +1,9 @@
 .home-page .top {
   margin: 3% 3%;
 }
-
+.home-page {
+  overflow-x: hidden;
+}
 .home-page .container .content .title {
   color: #1b392d;
   font-size: 84px;
@@ -169,6 +171,10 @@
   border-radius: 20px;
   background-color: #ddeee3;
   border: 1px solid transparent;
+  min-height: 250px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .home-page .kofee-team .teammate .title {
   font-family: MyCustomFont;

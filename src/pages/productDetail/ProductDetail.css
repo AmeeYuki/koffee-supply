@@ -203,3 +203,7 @@
 .product-detail-page .under-product-detail .bg-upd-2 {
   background: linear-gradient(to bottom, #1b392dec, #1b392d);
 }
+@media (max-width: 768px) {
+  .carousel-img-pro-detail {
+  }
+}

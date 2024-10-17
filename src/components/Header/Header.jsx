@@ -80,9 +80,9 @@ export default function Header() {
             <div onClick={() => navigate("/products")} className="cursor">
               Sản phẩm
             </div>
-            <div className="cursor" onClick={() => navigate("/diy_Koffe")}>
+            {/* <div className="cursor" onClick={() => navigate("/diy_Koffe")}>
               DIY cái bịch KO-FEE
-            </div>
+            </div> */}
             <div className="cursor" onClick={() => navigate("/")}>
               Blog
             </div>

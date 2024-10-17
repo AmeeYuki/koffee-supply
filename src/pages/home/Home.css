@@ -194,3 +194,40 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.container.top {
+  margin: 3% 3%;
+}
+
+.home-page .content {
+  color: #1b392d;
+  font-weight: bold;
+  line-height: 1.7;
+}
+
+.product-item {
+  width: 100%;
+  max-width: 440px; /* Set a max-width for larger screens */
+  margin-bottom: 2%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .home-page .content {
+    text-align: center; /* Center align content on smaller screens */
+  }
+
+  .home-page .product-sell .product-item {
+    width: 90%; /* Take more width on smaller screens */
+    margin: 10px auto; /* Center the product item */
+  }
+  .home-page .container .content .title {
+    color: #1b392d;
+    font-size: 30px;
+    font-family: "MyCustomFont";
+    line-height: 1.1;
+  }
+  .image-head {
+    display: none;
+  }
+}

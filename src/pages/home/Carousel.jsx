@@ -1,5 +1,4 @@
-import { Carousel, Col, ConfigProvider, Flex, Row } from "antd";
-import React from "react";
+import { Carousel, ConfigProvider, Flex } from "antd";
 
 export default function Carousele() {
   const teammates = [
@@ -61,7 +60,7 @@ export default function Carousele() {
       }}
     >
       <Carousel arrows infinite={true}>
-        {teammates.map((teammate, index) => (
+        {teammates.map((teammate) => (
           <div key="index">
             <div className="teammate">
               <p className="title"> "KO-FEE KHÔNG CHỈ LÀ CÀ PHÊ"</p>

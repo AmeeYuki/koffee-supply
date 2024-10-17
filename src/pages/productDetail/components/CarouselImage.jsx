@@ -5,6 +5,7 @@ export default function CarouselImage({ product }) {
   return (
     <div>
       <Carousel
+        className="carousel-img-pro-detail"
         arrows
         autoplay // Enable auto-play
         autoplaySpeed={3000} // Auto-play speed (3 seconds per slide)

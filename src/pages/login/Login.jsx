@@ -9,11 +9,17 @@ const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    message.success("Login successful!");
-    navigate("/dashboard-ad-ame");
-    // Thực hiện đăng nhập tại đây, ví dụ: gọi API
+    const { username, password } = values;
+
+    // Check if the username and password match "admin" and "12312345"
+    if (username === "admin" && password === "12312345") {
+      message.success("Login successful!");
+      navigate("/dashboard-ad-ame"); // Navigate to the dashboard on successful login
+    } else {
+      message.error("Invalid username or password!"); // Show an error message for invalid credentials
+    }
   };
 
   return (

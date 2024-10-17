@@ -1,21 +1,37 @@
 // src/components/OrderDetailsModal.js
 
-import React from "react";
-import { Col, ConfigProvider, Flex, Modal, Row, Table, Tag } from "antd"; // Import Table from Ant Design
+import React, { useState } from "react";
+import {
+  Col,
+  ConfigProvider,
+  Flex,
+  Modal,
+  Row,
+  Table,
+  Tag,
+  Select,
+  Button,
+  message,
+} from "antd"; // Import necessary components
 import dayjs from "dayjs";
-import { useGetAllOrderQuery } from "../../services/orderAPI";
+import {
+  useGetAllOrderQuery,
+  useUpdateOrderStatusMutation,
+} from "../../services/orderAPI"; // Import mutation for update
 
 const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
-  const { data: orders, isLoading } = useGetAllOrderQuery(); // Fetch all orders
-  const order = orders?.find((o) => o._id === orderId); // Find the specific order
-  console.log(order);
+  const { data: orders, isLoading } = useGetAllOrderQuery();
+  const [updateOrder] = useUpdateOrderStatusMutation();
+  const [status, setStatus] = useState(null);
+
+  const order = orders?.find((o) => o._id === orderId);
 
   if (isLoading) {
     return <p>Loading order details...</p>;
   }
 
   if (!order) {
-    return <p>.</p>;
+    return <p></p>;
   }
 
   // Define columns for the order details table
@@ -45,6 +61,22 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
     },
   ];
 
+  // Handle status change
+  const handleStatusChange = (value) => {
+    setStatus(value);
+  };
+
+  // Submit the status update
+  const handleUpdateStatus = async () => {
+    try {
+      await updateOrder({ orderId: order._id, orderStatus: status }).unwrap();
+      message.success("Order status updated successfully!");
+      onClose(); // Close modal after successful update
+    } catch (error) {
+      message.error("Failed to update order status.");
+    }
+  };
+
   return (
     <Modal
       title="Order Details"
@@ -55,7 +87,6 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
     >
       <Row>
         <Col span={11}>
-          {" "}
           <p>
             <strong>Order ID:</strong> {order._id}
           </p>
@@ -67,9 +98,8 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
           </p>
         </Col>
         <Col span={11} offset={1}>
-          {" "}
           <p>
-            <strong>Status:</strong>{" "}
+            <strong>Status: </strong>
             <Tag
               color={
                 order.orderStatus === 0
@@ -82,7 +112,7 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
                   ? "purple"
                   : order.orderStatus === 4
                   ? "red"
-                  : "default" // Default color for any unhandled orderStatus
+                  : "default"
               }
             >
               {order.orderStatus === 0
@@ -95,8 +125,7 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
                 ? "Completed"
                 : order.orderStatus === 4
                 ? "Canceled"
-                : "Unknown"}{" "}
-              {/* Default label for unhandled status */}
+                : "Unknown"}
             </Tag>
           </p>
           <p>
@@ -107,13 +136,28 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
             <strong>Approved By:</strong>{" "}
             {order.approveBy ? order.approveBy : "None"}
           </p>
+          <p>
+            <strong>Update Status:</strong>{" "}
+            <Select
+              style={{ width: 200 }}
+              placeholder="Select status"
+              onChange={handleStatusChange}
+              value={status}
+            >
+              <Select.Option value={0}>Pending</Select.Option>
+              <Select.Option value={1}>Approved</Select.Option>
+              <Select.Option value={2}>Shipped</Select.Option>
+              <Select.Option value={3}>Completed</Select.Option>
+              <Select.Option value={4}>Canceled</Select.Option>
+            </Select>
+          </p>
         </Col>
       </Row>
       <Table
-        dataSource={order.orderDetail} // Use the orderDetails array from the order
+        dataSource={order.orderDetail}
         columns={columns}
-        rowKey="_id" // Assuming each order detail has a unique key
-        pagination={false} // Disable pagination for simplicity
+        rowKey="_id"
+        pagination={false}
       />
       <br />
       <Flex justify="space-between">
@@ -137,6 +181,15 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
         <p>
           {(order.shippingFee + order.totalPrice).toLocaleString("vi-VN")} vnđ
         </p>
+      </Flex>
+      <Flex justify="end" style={{ marginTop: 10 }}>
+        <Button
+          type="primary"
+          onClick={handleUpdateStatus}
+          disabled={status === null || status === order.orderStatus} // Disable if status is not changed
+        >
+          Update Status
+        </Button>
       </Flex>
     </Modal>
   );

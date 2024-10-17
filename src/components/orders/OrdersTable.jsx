@@ -1,25 +1,30 @@
-// src/components/OrdersTable.js
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import dayjs from "dayjs";
+import { ConfigProvider, Table } from "antd"; // Import Ant Design Table
 import OrderDetailsModal from "./OrderDetailsModel"; // Import the modal
 
-const OrdersTable = ({ orders, isLoadingOrder }) => {
+const OrdersTable = ({ orders = [], isLoadingOrder }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredOrders, setFilteredOrders] = useState(orders);
   const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
   const [selectedOrderId, setSelectedOrderId] = useState(null); // State to store selected order ID
 
   useEffect(() => {
-    setFilteredOrders(orders); // Ensure orders are updated when prop changes
+    // Sort orders by 'createdAt' in descending order (newest first)
+    const sortedOrders = [...orders].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    setFilteredOrders(sortedOrders); // Update state with sorted orders
   }, [orders]);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = orders.filter((o) => o._id.toLowerCase().includes(term));
+    const filtered = orders.filter((o) =>
+      o.customerName.toLowerCase().includes(term)
+    );
     setFilteredOrders(filtered);
   };
 
@@ -32,6 +37,83 @@ const OrdersTable = ({ orders, isLoadingOrder }) => {
     setIsModalVisible(false); // Close the modal
     setSelectedOrderId(null); // Reset selected order ID
   };
+
+  const columns = [
+    {
+      title: "STT",
+      render: (_, __, index) => index + 1, // Display the index + 1 for a 1-based index
+    },
+    {
+      title: "Customer",
+      dataIndex: "customerName",
+      key: "customerName",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Total",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
+      render: (text) => `${text.toLocaleString("vi-VN")} vnđ`,
+    },
+    {
+      title: "Status",
+      dataIndex: "orderStatus",
+      key: "orderStatus",
+      render: (status) => (
+        <span
+          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+            status === 0
+              ? "bg-yellow-100 text-yellow-800" // Pending
+              : status === 1
+              ? "bg-green-100 text-green-800" // Approved
+              : status === 2
+              ? "bg-blue-100 text-blue-800" // Shipped
+              : status === 3
+              ? "bg-purple-100 text-purple-800" // Completed
+              : status === 4
+              ? "bg-red-100 text-red-800" // Canceled
+              : "bg-gray-100 text-gray-800" // Default for any unhandled orderStatus
+          }`}
+        >
+          {status === 0
+            ? "Pending"
+            : status === 1
+            ? "Approved"
+            : status === 2
+            ? "Shipped"
+            : status === 3
+            ? "Completed"
+            : status === 4
+            ? "Canceled"
+            : "Unknown"}
+          {/* Default label for unhandled status */}
+        </span>
+      ),
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (date) => dayjs(date).format("HH:mm DD-MM-YY"),
+    },
+
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => (
+        <button
+          className="text-indigo-400 hover:text-indigo-300"
+          onClick={() => handleViewDetails(record._id)} // Pass order ID to open modal
+        >
+          View
+        </button>
+      ),
+    },
+  ];
 
   if (isLoadingOrder) {
     return <p>Loading orders...</p>; // Simple loading message, can be replaced with a spinner
@@ -61,108 +143,31 @@ const OrdersTable = ({ orders, isLoadingOrder }) => {
             />
           </div>
         </div>
-
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-700">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  STT
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Customer
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Phone
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Total
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Approve By
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-
-            <tbody className="divide divide-gray-700">
-              {filteredOrders?.map((o, index) => (
-                <motion.tr
-                  key={o._id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
-                    {index + 1}{" "}
-                    {/* Display the index + 1 for a 1-based index */}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
-                    {o.customerName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
-                    {o.phone}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
-                    {o.totalPrice.toLocaleString("vi-VN")} vnđ
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        o.orderStatus === 0
-                          ? "bg-yellow-100 text-yellow-800" // Pending
-                          : o.orderStatus === 1
-                          ? "bg-green-100 text-green-800" // Approved
-                          : o.orderStatus === 2
-                          ? "bg-blue-100 text-blue-800" // Shipped
-                          : o.orderStatus === 3
-                          ? "bg-purple-100 text-purple-800" // Completed
-                          : o.orderStatus === 4
-                          ? "bg-red-100 text-red-800" // Canceled
-                          : "bg-gray-100 text-gray-800" // Default for any unhandled orderStatus
-                      }`}
-                    >
-                      {o.orderStatus === 0
-                        ? "Pending"
-                        : o.orderStatus === 1
-                        ? "Approved"
-                        : o.orderStatus === 2
-                        ? "Shipped"
-                        : o.orderStatus === 3
-                        ? "Completed"
-                        : o.orderStatus === 4
-                        ? "Canceled"
-                        : "Unknown"}
-                      {/* Default label for unhandled status */}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    {dayjs(o.createdAt).format("HH:mm DD-MM-YY")}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    {o.approveBy ? o.approveBy : "None"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    <button
-                      className="text-indigo-400 hover:text-indigo-300 mr-2"
-                      onClick={() => handleViewDetails(o._id)} // Pass order ID to open modal
-                    >
-                      View
-                    </button>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorBgContainer: "#3f567b",
+              // bodySortBg: "#333",
+            },
+            components: {
+              Table: {
+                headerBg: "#3f567b  ",
+                footerColor: "#fff",
+                colorTextHeading: "#fff",
+                colorText: "#fff",
+                borderColor: "#fff",
+              },
+            },
+          }}
+        >
+          <Table
+            dataSource={filteredOrders}
+            columns={columns}
+            pagination={{ pageSize: 5 }} // You can adjust the number of items per page here
+            rowKey="_id"
+            style={{ color: "#fff" }}
+          />
+        </ConfigProvider>
       </motion.div>
 
       <OrderDetailsModal

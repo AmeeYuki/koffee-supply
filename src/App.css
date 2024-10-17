@@ -22,3 +22,11 @@
   )::before {
   background-color: #00000000;
 }
+
+.ant-pagination .ant-pagination-item a {
+  color: #fff;
+}
+
+.ant-pagination .ant-pagination-next button {
+  color: #fff;
+}

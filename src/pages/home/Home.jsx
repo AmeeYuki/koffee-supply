@@ -1,20 +1,21 @@
 import { Button, Col, Flex, Row } from "antd";
 import "./Home.css";
 import BeanToBrew from "./BeanToBrew";
-import Carousele from "./Caurosel";
+import Carousel from "./Carousel"; // Corrected the name from 'Caurosel' to 'Carousel'
 import { useNavigate } from "react-router-dom";
+
 function Home() {
   const navigate = useNavigate();
+
   return (
     <div className="home-page">
       <div className="container top">
-        <Flex gap={50} wrap="wrap" justify="space-around">
-          <div>
+        <Flex gap={20} wrap="wrap" justify="space-between">
+          <div className="image-head">
             <img
-              width={"400px"}
               src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/kofee_red.png?alt=media&token=408dd306-8bd7-478d-92c2-4c025644fd6e"
               alt="Coffe Logo"
-            ></img>
+            />
           </div>
           <div className="content">
             <p className="title">
@@ -45,6 +46,9 @@ function Home() {
                 padding: "20px 40px",
                 marginTop: 20,
               }}
+              onClick={() => {
+                navigate("/diy_Koffe");
+              }}
             >
               DIY Cái bịch KO-FEE
             </Button>
@@ -61,10 +65,7 @@ function Home() {
         </p>
         <p style={{ padding: "0 10%", fontWeight: 600, letterSpacing: 1 }}>
           "Ko-fee" - cái tên mang âm hưởng J'rai, cái tên này như là một lời tri
-          ân dành cho những người dân tộc J'rai. Những người con của núi rừng
-          Tây Nguyên đã gìn giữ và phát triển nghề trồng cà phê nơi đây. Hơn cả
-          một thức uống, Kofee là kết tinh của văn hóa, là niềm tự hào của người
-          dân tộc J'rai.
+          ơn dành cho những người dân tộc J'rai...
         </p>
       </div>
       <div className="product-sell">
@@ -74,67 +75,51 @@ function Home() {
           </p>
         </div>
         <Flex justify="space-evenly" wrap="wrap">
-          <div className="product-item">
-            <div className="product-information">
-              <p className="title ">The 100% Arabica Măng Đen</p>
-              <p className="description">
-                Hạt Arabica Măng Đen cân bằng độ chua nhẹ với hương hoa, trái
-                cây và vị đắng nhẹ.
-              </p>
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KofeeArabica.png?alt=media&token=67da4c2e-416b-40f6-8d97-c601f7f47335"
-                alt="Kofee"
-              ></img>
-              <p className="money">550.000 vnđ | 1kg</p>
+          {[
+            {
+              title: "The 100% Arabica Măng Đen",
+              description:
+                "Hạt Arabica Măng Đen cân bằng độ chua nhẹ với hương hoa, trái cây và vị đắng nhẹ.",
+              price: "550.000 vnđ | 1kg",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KofeeArabica.png?alt=media&token=67da4c2e-416b-40f6-8d97-c601f7f47335",
+              productId: "66facbb9f39fd8b02d2e71bc",
+            },
+            {
+              title: "The 100% Robusta Măng Đen",
+              description:
+                "Hạt Robusta Măng Đen có hương vị đắng đậm đà, mạnh mẽ mang lại sự sảng khoái, tỉnh táo",
+              price: "515.000 vnđ | 1kg",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KoffeRobusta.png?alt=media&token=6d5fb927-dead-4532-a667-46ed27791310",
+              productId: "66facccc139d39971f67ac56",
+            },
+          ].map((product) => (
+            <div className="product-item" key={product.productId}>
+              <div className="product-information">
+                <p className="title">{product.title}</p>
+                <p className="description">{product.description}</p>
+                <img src={product.image} alt={product.title} />
+                <p className="money">{product.price}</p>
+              </div>
+              <div className="product-action">
+                <p
+                  className="see-more"
+                  onClick={() =>
+                    navigate(`/product_detail/${product.productId}`)
+                  }
+                >
+                  Tìm hiểu thêm
+                </p>
+                <i
+                  className="add-to-cart ri-shopping-cart-2-line"
+                  onClick={() =>
+                    navigate(`/product_detail/${product.productId}`)
+                  }
+                ></i>
+              </div>
             </div>
-            <div className="product-action">
-              <p
-                className="see-more"
-                onClick={() => {
-                  navigate("/product_detail/66facbb9f39fd8b02d2e71bc");
-                }}
-              >
-                Tìm hiểu thêm
-              </p>
-              <i
-                onClick={() => {
-                  navigate("/product_detail/66facbb9f39fd8b02d2e71bc");
-                }}
-                className="add-to-cart ri-shopping-cart-2-line"
-              ></i>
-            </div>
-          </div>
-
-          <div className="product-item">
-            <div className="product-information">
-              <p className="title ">The 100% Robusta Măng Đen</p>
-              <p className="description">
-                Hạt Robusta Măng Đen có hương vị đắng đậm đà, mạnh mẽ mang lại
-                sự sảng khoái, tỉnh táo
-              </p>
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KoffeRobusta.png?alt=media&token=6d5fb927-dead-4532-a667-46ed27791310"
-                alt="Kofee"
-              ></img>
-              <p className="money">515.000 vnđ | 1kg</p>
-            </div>
-            <div className="product-action">
-              <p
-                onClick={() => {
-                  navigate("/product_detail/66facccc139d39971f67ac56");
-                }}
-                className="see-more"
-              >
-                Tìm hiểu thêm
-              </p>
-              <i
-                onClick={() => {
-                  navigate("/product_detail/66facccc139d39971f67ac56");
-                }}
-                className="add-to-cart ri-shopping-cart-2-line"
-              ></i>
-            </div>
-          </div>
+          ))}
         </Flex>
       </div>
       <div id="blogs" className="kofee-bean-to-brew">
@@ -143,10 +128,9 @@ function Home() {
           <BeanToBrew />
         </div>
       </div>
-
       <div className="kofee-team">
         <div className="header">KO-FEE TEAMS</div>
-        <Carousele />
+        <Carousel />
       </div>
     </div>
   );

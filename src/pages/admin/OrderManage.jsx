@@ -8,15 +8,36 @@ import OrderDistribution from "../../components/orders/OrderDistribution";
 import OrdersTable from "../../components/orders/OrdersTable";
 import { useGetAllOrderQuery } from "../../services/orderAPI";
 
-const orderStats = {
-  totalOrders: "0",
-  pendingOrders: "0",
-  completedOrders: "0",
-  totalRevenue: "0",
-};
-
 export default function OrdersPage() {
-  const { data: orders, errorOrder, isLoadingOrder } = useGetAllOrderQuery();
+  const {
+    data: orders = [],
+    errorOrder,
+    isLoadingOrder,
+  } = useGetAllOrderQuery();
+
+  const orderStats = {
+    totalOrders: orders.length.toString(), // Total orders
+    pendingOrders: orders
+      .filter((order) => order.orderStatus === 0)
+      .length.toString(), // Pending orders
+    completedOrders: orders
+      .filter((order) => order.orderStatus === 3)
+      .length.toString(), // Completed orders
+      totalRevenue: orders
+      .filter(order => order.orderStatus === 3) // Only include completed orders
+      .reduce((total, order) => total + order.totalPrice, 0)
+      .toLocaleString("vi-VN") + ' vnđ', // Total revenue formatted
+
+  };
+
+  if (isLoadingOrder) {
+    return <p>Loading orders...</p>;
+  }
+
+  if (errorOrder) {
+    return <p>Error fetching orders: {errorOrder.message}</p>;
+  }
+
   return (
     <div className="flex-1 relative z-10 overflow-auto">
       <Header title={"Orders"} />

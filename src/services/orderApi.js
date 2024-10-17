@@ -1,20 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../config";
-// import { selectToken } from "../slices/auth.slice";
 
 export const orderAPI = createApi({
   reducerPath: "orderManagement",
-  tagTypes: ["OrderList"],
+  tagTypes: ["OrderList", "OrderDetails"], // Add OrderDetails for individual orders
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    // prepareHeaders: (headers, { getState }) => {
-    //   const token = selectToken(getState());
-    //   if (token) {
-    //     headers.append("Authorization", `Bearer ${token}`);
-    //   }
-    //   headers.append("Content-Type", "application/json");
-    //   return headers;
-    // },
   }),
   endpoints: (builder) => ({
     getAllOrder: builder.query({
@@ -27,9 +18,21 @@ export const orderAPI = createApi({
         method: "POST",
         body: newOrder,
       }),
-      invalidatesTags: ["OrderList"], // Invalidate the order list to refetch after creating a new order
+      invalidatesTags: ["OrderList"],
+    }),
+    updateOrderStatus: builder.mutation({
+      query: ({ orderId, orderStatus }) => ({
+        url: `orders/${orderId}`,
+        method: "PUT",
+        body: { orderStatus: orderStatus },
+      }),
+      invalidatesTags: ["OrderList", { type: "OrderDetails", id: "orderId" }],
     }),
   }),
 });
 
-export const { useGetAllOrderQuery, useCreateOrderMutation } = orderAPI;
+export const {
+  useGetAllOrderQuery,
+  useCreateOrderMutation,
+  useUpdateOrderStatusMutation,
+} = orderAPI;

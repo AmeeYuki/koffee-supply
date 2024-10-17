@@ -30,6 +30,8 @@ export default function OrderForm() {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
+  const [loading, setLoading] = useState(false); // Add loading state
+
   const navigate = useNavigate();
 
   // Using the createOrder mutation
@@ -65,6 +67,8 @@ export default function OrderForm() {
 
   const handleSubmit = async (values) => {
     // Find the corresponding names for the selected IDs
+    setLoading(true); // Set loading to true when submitting
+
     const selectedProvinceName = VietNamAddress.find(
       (province) => province.Name === selectedProvince
     )?.Name;
@@ -111,6 +115,8 @@ export default function OrderForm() {
           "There was an error creating your order. Please try again.",
         placement: "topRight",
       });
+    } finally {
+      setLoading(false); // Reset loading state after operation
     }
   };
 
@@ -252,6 +258,7 @@ export default function OrderForm() {
             type="primary"
             htmlType="submit"
             block
+            loading={loading}
           >
             Thanh Toán
           </Button>
@@ -281,6 +288,11 @@ export default function OrderForm() {
               />
               <Text style={{ marginLeft: 10 }}>
                 {item.product.productName} x {item.quantity}
+                {item?.product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
+                  <p>
+                    ({item.bag} - {item.size} - {item.weight}g )
+                  </p>
+                )}
               </Text>
             </Flex>
             <Text>{item.finalPrice.toLocaleString()} VND</Text>

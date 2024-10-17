@@ -17,7 +17,7 @@ import dayjs from "dayjs";
 import {
   useGetAllOrderQuery,
   useUpdateOrderStatusMutation,
-} from "../../services/orderAPI"; // Import mutation for update
+} from "../../services/orderApi"; // Import mutation for update
 
 const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
   const { data: orders, isLoading } = useGetAllOrderQuery();

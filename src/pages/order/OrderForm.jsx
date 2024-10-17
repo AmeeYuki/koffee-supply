@@ -14,7 +14,7 @@ import {
   notification,
 } from "antd";
 import { VietNamAddress } from "../../data/vietnamAddress"; // Adjust the path as needed
-import { useCreateOrderMutation } from "../../services/orderAPI"; // Import your createOrder mutation
+import { useCreateOrderMutation } from "../../services/orderApi"; // Import your createOrder mutation
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Header from "../../components/common/Header";
 import StatCard from "../../components/common/StatCard";
 import OrdersTable from "../../components/orders/OrdersTable";
-import { useGetAllOrderQuery } from "../../services/orderAPI.js";
+import { useGetAllOrderQuery } from "../../services/orderAPI";
 
 export default function OrdersPage() {
   const {

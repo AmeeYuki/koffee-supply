@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Col, Flex, Row, Tag, message } from "antd";
+import { Col, Flex, Input, Row, Tag, message } from "antd";
 import containerIcon from "../../../assets/icon/Container.png";
 import DescriptionMore from "./DescriptionMore";
 
 export default function ProductInformation({ onAddToCart, product }) {
   const [selectedSize, setSelectedSize] = useState("Nguyên Hạt"); // Default to first value (text)
   const [selectedWeight, setSelectedWeight] = useState(100); // Default to first weight value
-  const [selectedBag, setSelectedBag] = useState("Xanh"); // Default to the color "Xanh"
+  const [selectedBag, setSelectedBag] = useState("Kofee"); // Default to the color "Xanh"
   const [quantity, setQuantity] = useState(1); // Default quantity value
   const [finalPrice, setFinalPrice] = useState(product?.price); // Default final price
+  const [customerName, setCustomerName] = useState(""); // State for customer name
+  const [customerMessage, setCustomerMessage] = useState(""); // State for customer message
 
   useEffect(() => {
     // If the product type matches a specific ID, calculate final price based on weight
@@ -41,6 +43,13 @@ export default function ProductInformation({ onAddToCart, product }) {
   };
 
   const handleAddToCart = () => {
+    if (!customerName.trim() || !customerMessage.trim()) {
+      message.error(
+        "Vui lòng nhập tên và lời nhắn của bạn trước khi thêm vào giỏ hàng."
+      );
+      return; // Ngăn không cho thêm vào giỏ hàng
+    }
+
     const newItem = {
       productId: product._id,
       product: product,
@@ -49,6 +58,8 @@ export default function ProductInformation({ onAddToCart, product }) {
       bag: selectedBag,
       quantity,
       finalPrice,
+      nameSend: customerName, // Add customer name to the cart item
+      messageSend: customerMessage, // Add customer message to the cart item
     };
     onAddToCart(newItem); // Pass the new item to the parent function
   };
@@ -138,7 +149,7 @@ export default function ProductInformation({ onAddToCart, product }) {
             >
               Túi đựng KOFEE:
             </p>
-            {["Xanh", "Đỏ", "Hồng"].map((color) => (
+            {["Kofee", "Halloween ( limited )"].map((color) => (
               <button
                 key={color}
                 className={`radio-button-bag ${
@@ -149,12 +160,13 @@ export default function ProductInformation({ onAddToCart, product }) {
                 <p
                   style={{
                     backgroundColor:
-                      color === "Xanh"
-                        ? "#1b392d"
-                        : color === "Đỏ"
-                        ? "#8e2626"
+                      color === "Kofee"
+                        ? "#ab2a2a"
+                        : color === "Halloween ( limited )"
+                        ? "#ff7b15"
                         : "#e05353",
-                    padding: "15px 130px 15px 10px ",
+                    padding: "15px 10px 15px 10px ",
+                    // width: "45%",
                     borderRadius: "10px",
                     color: "#fff",
                   }}
@@ -167,6 +179,33 @@ export default function ProductInformation({ onAddToCart, product }) {
           </div>
         </>
       )}
+
+      <div className="customer-inputs">
+        <p
+          style={{
+            marginTop: 12,
+            marginBottom: 16,
+            color: "#63A484",
+            fontWeight: "700",
+          }}
+        >
+          Tên và lời nhắn của bạn trên túi KOFEE:
+        </p>
+        <Input
+          placeholder="Tên của bạn"
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
+          style={{ marginTop: 6, marginBottom: 8, width: "100%" }}
+        />
+        <Input.TextArea
+          placeholder="Lời nhắn của bạn"
+          value={customerMessage}
+          onChange={(e) => setCustomerMessage(e.target.value)}
+          rows={4}
+          style={{ marginBottom: 16, width: "100%" }}
+        />
+      </div>
+
       {/* Quantity Selection */}
       <div className="quantity-selection">
         <p style={{ marginBottom: 16, color: "#63A484", fontWeight: "700" }}>
@@ -214,11 +253,6 @@ export default function ProductInformation({ onAddToCart, product }) {
           500.000 VND
         </p>
       </Flex>
-      {product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
-        <div style={{ width: 600 }}>
-          <DescriptionMore product={product} />
-        </div>
-      )}
     </div>
   );
 }

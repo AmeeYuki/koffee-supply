@@ -34,7 +34,9 @@ export default function ProductDetail() {
       cartItem.productId === item.productId &&
       cartItem.size === item.size &&
       cartItem.weight === item.weight &&
-      cartItem.bag === item.bag;
+      cartItem.bag === item.bag &&
+      cartItem.nameSend === item.nameSend &&
+      cartItem.messageSend === item.messageSend;
 
     setCart((prevCart) => {
       const existingItemIndex = prevCart.findIndex((cartItem) =>

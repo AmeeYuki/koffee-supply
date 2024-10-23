@@ -20,6 +20,7 @@ export default function ProductList({ products }) {
             <div className="product-item" key={el.id}>
               <div className="product-information">
                 <img
+                  style={{ height: 300 }}
                   src={el?.image}
                   alt={el?.productName}
                   onLoad={() => setLoading(false)} // Cập nhật trạng thái loading khi hình ảnh đã được tải

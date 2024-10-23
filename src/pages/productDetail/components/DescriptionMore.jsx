@@ -2,17 +2,18 @@ import { Col, Collapse, ConfigProvider, Row } from "antd";
 import React from "react";
 
 export default function DescriptionMore({ product }) {
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
   const items = [
     {
       key: "1",
-      label: "Mô tả",
+      label: "Mô tả sản phẩm",
       children: (
-        <div>
+        <div
+          style={{
+            padding: "0px 0px 10px",
+            borderBottom: "1px solid #333",
+            borderTop: "1px solid #333",
+          }}
+        >
           <Row>
             <Col span={5}>
               <p>
@@ -36,9 +37,13 @@ export default function DescriptionMore({ product }) {
     },
     {
       key: "2",
-      label: "Mô tả sản phẩm",
+      label: (
+        <p style={{ padding: "10px 0px", borderBottom: "1px solid #333" }}>
+          Vùng nguyên liệu
+        </p>
+      ),
       children: (
-        <div>
+        <div style={{ padding: "10px 0px", borderBottom: "1px solid #333" }}>
           {/* <p>Thôn Cầu Đất, Thành Phố Đà Lạt, Tỉnh Lâm Đồng</p> */}
           <Row>
             <Col span={5}>
@@ -74,7 +79,9 @@ export default function DescriptionMore({ product }) {
         },
         components: {
           Collapse: {
-            headerBg: "#ffffff",
+            headerBg: "#fffcea",
+            // colorBorder: "#333",
+            colorBgContainer: "#fffcea",
           },
         },
       }}

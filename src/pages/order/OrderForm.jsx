@@ -217,12 +217,7 @@ export default function OrderForm() {
           <Form.Item name="note">
             <Input.TextArea placeholder="Ghi chú" />
           </Form.Item>
-          <p style={{ color: "#1b392d", fontWeight: 600 }}>
-            Nếu bạn tặng ai món quà này hãy ghi lời chúc cho Kơ-fee biết nhé:
-          </p>
-          <Form.Item name="letterSend">
-            <Input.TextArea placeholder="Lời chúc" />
-          </Form.Item>
+
           <Divider />
           <Title level={4}>Phương thức giao hàng</Title>
           <Text>
@@ -284,15 +279,17 @@ export default function OrderForm() {
               <Image
                 src={item.product.image}
                 alt={item.product.productName}
-                width={50}
+                width={150}
               />
               <Text style={{ marginLeft: 10 }}>
-                {item.product.productName} x {item.quantity}
-                {item?.product?.type._id === "66eda5ab30bd8d4bcb684cd7" && (
-                  <p>
-                    ({item.bag} - {item.size} - {item.weight}g )
-                  </p>
-                )}
+                <b style={{ marginRight: 5 }}>
+                  {item.product.productName} x {item.quantity}
+                </b>
+                ({item.bag} - {item.size} - {item.weight}g )
+                <br />
+                <Text style={{ fontWeight: "500" }}>Tên: {item.nameSend}</Text>
+                <br />
+                <Text>Lời nhắn: {item.messageSend}</Text>
               </Text>
             </Flex>
             <Text>{item.finalPrice.toLocaleString()} VND</Text>

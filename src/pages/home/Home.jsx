@@ -1,6 +1,8 @@
 import { Button, Col, Flex, Row } from "antd";
 import "./Home.css";
 import BeanToBrew from "./BeanToBrew";
+import Home1 from "../../assets/images/home1.png";
+import Home2 from "../../assets/images/home2.png";
 import Carousel from "./Carousel"; // Corrected the name from 'Caurosel' to 'Carousel'
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +11,7 @@ function Home() {
 
   return (
     <div className="home-page">
-      <div className="container top">
+      {/* <div className="container top">
         <Flex gap={20} wrap="wrap" justify="space-between">
           <div className="image-head">
             <img
@@ -54,9 +56,20 @@ function Home() {
             </Button>
           </div>
         </Flex>
-      </div>
+      </div> */}
+      <img
+        style={{ width: "100%", objectFit: "contain", userSelect: "none" }}
+        src={Home1}
+        alt="image-home1"
+      />
       <div className="kofee-line"></div>
-      <div className="intro-kofee">
+      <img
+        style={{ width: "100%", objectFit: "contain", userSelect: "none" }}
+        src={Home2}
+        alt="image-home2"
+      />
+
+      {/* <div className="intro-kofee">
         <p className="title" style={{ textAlign: "center" }}>
           KO-FEE
         </p>
@@ -67,7 +80,7 @@ function Home() {
           "Ko-fee" - cái tên mang âm hưởng J'rai, cái tên này như là một lời tri
           ơn dành cho những người dân tộc J'rai...
         </p>
-      </div>
+      </div> */}
       <div className="product-sell">
         <div className="header">
           <p className="title">

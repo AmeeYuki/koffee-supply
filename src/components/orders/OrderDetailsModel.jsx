@@ -39,7 +39,12 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
     {
       title: "Item Name",
       dataIndex: "productName",
-      render: (text, record) => <span>{record.productId.productName}</span>,
+      render: (text, record) => (
+        <>
+          <span>{record.productId.productName}</span>
+          <br />({record.size} - {record.weight}g - {record.bag})
+        </>
+      ),
     },
     {
       title: "Quantity",
@@ -58,6 +63,18 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
       dataIndex: "total",
       key: "total",
       render: (_, record) => `${record.finalPrice.toLocaleString("vi-VN")} vnđ`, // Calculate total
+    },
+    {
+      title: "Name Send",
+      dataIndex: "nameSend",
+      key: "nameSend",
+      render: (_, record) => `${record.nameSend}`, // Calculate total
+    },
+    {
+      title: "Message Send",
+      dataIndex: "messageSend",
+      key: "messageSend",
+      render: (_, record) => `${record.messageSend}`, // Calculate total
     },
   ];
 
@@ -83,7 +100,7 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
       visible={isVisible}
       onCancel={onClose}
       footer={null}
-      width={800} // Set a width for better visibility
+      width={1200} // Set a width for better visibility
     >
       <Row>
         <Col span={11}>

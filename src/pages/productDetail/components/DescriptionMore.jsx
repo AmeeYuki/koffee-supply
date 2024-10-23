@@ -11,7 +11,7 @@ export default function DescriptionMore({ product }) {
           style={{
             padding: "0px 0px 10px",
             borderBottom: "1px solid #333",
-            borderTop: "1px solid #333",
+            // borderTop: "1px solid #333",
           }}
         >
           <Row>
@@ -37,13 +37,15 @@ export default function DescriptionMore({ product }) {
     },
     {
       key: "2",
-      label: (
-        <p style={{ padding: "10px 0px", borderBottom: "1px solid #333" }}>
-          Vùng nguyên liệu
-        </p>
-      ),
+      label: "Vùng nguyên liệu",
       children: (
-        <div style={{ padding: "10px 0px", borderBottom: "1px solid #333" }}>
+        <div
+          style={{
+            padding: "0px 0px 10px",
+            borderBottom: "1px solid #333",
+            // borderTop: "1px solid #333",
+          }}
+        >
           {/* <p>Thôn Cầu Đất, Thành Phố Đà Lạt, Tỉnh Lâm Đồng</p> */}
           <Row>
             <Col span={5}>

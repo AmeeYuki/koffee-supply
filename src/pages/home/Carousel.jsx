@@ -16,7 +16,7 @@ export default function Carousele() {
       description:
         "Tôi tin rằng mỗi tách cà phê đều kể một câu chuyện riêng, và hành trình của tôi là khám phá những câu chuyện ấy.",
       image:
-        "https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/KDUY.jpg?alt=media&token=a68238a3-4a29-4b8d-98b6-ff644dcfef02",
+        "https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/anhduy2.0.png?alt=media&token=d6c1920d-1670-4c3e-8b7e-16ae45b2c5c3",
     },
     {
       name: "NGUYEN LE VY KHA",

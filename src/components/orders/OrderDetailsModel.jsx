@@ -56,13 +56,16 @@ const OrderDetailsModal = ({ isVisible, onClose, orderId }) => {
       dataIndex: "price",
       key: "price",
       render: (_, record) =>
-        `${record?.productId.price.toLocaleString("vi-VN")} vnđ`, // Format price
+        `${((record?.productId.price * record?.weight) / 1000).toLocaleString(
+          "vi-VN"
+        )} vnđ`, // Format price
     },
     {
       title: "Total",
       dataIndex: "total",
       key: "total",
-      render: (_, record) => `${record.finalPrice.toLocaleString("vi-VN")} vnđ`, // Calculate total
+      render: (_, record) =>
+        `${(record.finalPrice * record.quantity).toLocaleString("vi-VN")} vnđ`, // Calculate total
     },
     {
       title: "Name Send",

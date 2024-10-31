@@ -81,21 +81,28 @@ export default function Footer() {
                   <p className="link-item">Chính sách bảo mật</p>
                 </div>
                 <div className="icon-contact">
-                  <img
-                    className="icon"
-                    height={40}
-                    src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/facebook%20icon.png?alt=media&token=39a0a3ad-55ae-4115-bab7-444777b835ce"
-                  ></img>
-                  <img
-                    className="icon"
-                    height={40}
-                    src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/instagram%20icon.png?alt=media&token=dc1b95f0-1f36-40dd-9ce7-7c08c878df87"
-                  ></img>
-                  <img
-                    className="icon"
-                    height={40}
-                    src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/twitterx%20icon.png?alt=media&token=f13bbb1c-748c-4f41-8a26-04e34290ce11"
-                  ></img>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61566179674823"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="icon"
+                      height={40}
+                      src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/facebook%20icon.png?alt=media&token=39a0a3ad-55ae-4115-bab7-444777b835ce"
+                    ></img>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/kofee_supplies/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="icon"
+                      height={40}
+                      src="https://firebasestorage.googleapis.com/v0/b/kofee-a0348.appspot.com/o/instagram%20icon.png?alt=media&token=dc1b95f0-1f36-40dd-9ce7-7c08c878df87"
+                    ></img>
+                  </a>
                 </div>
               </Flex>
             </div>

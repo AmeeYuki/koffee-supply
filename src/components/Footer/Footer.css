@@ -12,6 +12,9 @@ footer .link-item {
 footer .icon-contact .icon {
   margin: 0px 5px;
 }
+footer .icon-contact {
+  display: flex;
+}
 footer .btn-send-information-customer {
   color: #1b392d;
   background-color: #fff;
